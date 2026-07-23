@@ -1,0 +1,24 @@
+{
+  "title": "Tài khoản",
+  "profile": "Thông tin cá nhân",
+  "orders": "Đơn hàng của tôi",
+  "noOrders": "Bạn chưa có đơn hàng nào",
+  "startShopping": "Bắt đầu mua sắm",
+  "orderNumber": "Đơn hàng #",
+  "orderDate": "Ngày đặt",
+  "orderTotal": "Tổng tiền",
+  "orderStatus": "Trạng thái",
+  "orderItems": "sản phẩm",
+  "viewOrder": "Xem chi tiết",
+  "name": "Họ tên",
+  "email": "Email",
+  "phone": "Số điện thoại",
+  "logout": "Đăng xuất",
+  "loggedOut": "Đã đăng xuất",
+  "status": {
+    "pending": "Chờ xử lý",
+    "completed": "Hoàn thành",
+    "canceled": "Đã hủy",
+    "requires_action": "Cần xác nhận"
+  }
+}

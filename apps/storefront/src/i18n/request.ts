@@ -14,6 +14,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
       product: (await import(`./messages/${locale}/product.json`)).default,
       category: (await import(`./messages/${locale}/category.json`)).default,
       auth: (await import(`./messages/${locale}/auth.json`)).default,
+      cart: (await import(`./messages/${locale}/cart.json`)).default,
+      checkout: (await import(`./messages/${locale}/checkout.json`)).default,
+      account: (await import(`./messages/${locale}/account.json`)).default,
     },
   };
 });

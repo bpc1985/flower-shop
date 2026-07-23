@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import {
   Sheet,
@@ -25,8 +26,12 @@ export function LoginDialog({ children }: LoginDialogProps) {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [tab, setTab] = useState<Tab>("email");
   const t = useTranslations("auth");
+  const router = useRouter();
 
-  const handleSuccess = () => setOpen(false);
+  const handleSuccess = () => {
+    setOpen(false);
+    router.push("/account");
+  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

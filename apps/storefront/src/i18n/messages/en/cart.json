@@ -1,0 +1,16 @@
+{
+  "title": "Cart",
+  "empty": "Your cart is empty",
+  "emptyHint": "Discover our collection",
+  "browseOccasions": "Browse occasions",
+  "checkout": "Checkout",
+  "shipping": "Shipping",
+  "subtotal": "Subtotal",
+  "total": "Total",
+  "quantity": "Qty",
+  "tier": "Tier",
+  "stems": "stems",
+  "calculatedAtCheckout": "Calculated at checkout",
+  "remove": "Remove",
+  "undo": "Undo"
+}

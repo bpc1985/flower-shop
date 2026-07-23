@@ -1,0 +1,16 @@
+{
+  "title": "Giỏ hàng",
+  "empty": "Giỏ hàng trống",
+  "emptyHint": "Khám phá bộ sưu tập của chúng tôi",
+  "browseOccasions": "Xem theo dịp",
+  "checkout": "Thanh toán",
+  "shipping": "Phí giao hàng",
+  "subtotal": "Tạm tính",
+  "total": "Tổng cộng",
+  "quantity": "SL",
+  "tier": "Phân khúc",
+  "stems": "cành",
+  "calculatedAtCheckout": "Tính khi thanh toán",
+  "remove": "Xóa",
+  "undo": "Hoàn tác"
+}

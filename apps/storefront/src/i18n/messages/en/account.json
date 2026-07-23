@@ -1,0 +1,24 @@
+{
+  "title": "Account",
+  "profile": "Profile",
+  "orders": "My Orders",
+  "noOrders": "No orders yet",
+  "startShopping": "Start shopping",
+  "orderNumber": "Order #",
+  "orderDate": "Date",
+  "orderTotal": "Total",
+  "orderStatus": "Status",
+  "orderItems": "items",
+  "viewOrder": "View details",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "logout": "Log out",
+  "loggedOut": "Logged out",
+  "status": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "canceled": "Canceled",
+    "requires_action": "Action required"
+  }
+}

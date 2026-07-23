@@ -25,4 +25,8 @@ export const queryKeys = {
     all: ["region"] as const,
     current: () => [...queryKeys.region.all, "current"] as const,
   },
+  orders: {
+    all: ["orders"] as const,
+    lists: () => [...queryKeys.orders.all, "list"] as const,
+  },
 };

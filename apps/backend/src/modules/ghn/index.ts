@@ -154,8 +154,8 @@ class GHNFulfillmentProvider extends AbstractFulfillmentProviderService {
   private client: GHNClient;
   private config: GHNConfig;
 
-  constructor(cradle: Record<string, unknown>, options?: Record<string, unknown>) {
-    super(cradle as any);
+  constructor(_cradle: Record<string, unknown>, options?: Record<string, unknown>) {
+    super();
 
     const opts = (options || {}) as Record<string, unknown>;
     const fromDistrictId = parseInt(String(opts.fromDistrictId || process.env.GHN_FROM_DISTRICT_ID || "0")) || 0;
@@ -209,7 +209,7 @@ class GHNFulfillmentProvider extends AbstractFulfillmentProviderService {
     return data;
   }
 
-  async canCalculate(data: Record<string, unknown>): Promise<any> {
+  async canCalculate(data: any): Promise<boolean> {
     const districtId = data.district_id as number;
     if (!districtId) return false;
     return !!getZone(districtId);

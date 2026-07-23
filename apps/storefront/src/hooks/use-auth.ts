@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { authClient } from "@/lib/auth-client";
-import { medusaClient } from "@/lib/medusa-client";
+import { medusaClient, getStoredToken } from "@/lib/medusa-client";
 import { queryKeys } from "./query-keys";
 import { toast } from "sonner";
 
@@ -34,12 +34,17 @@ export function useCustomer() {
       try {
         const { customer } = await medusaClient.store.customer.retrieve();
         return customer as any;
-      } catch {
-        return null;
+      } catch (err: any) {
+        // 401 = not authenticated (normal)
+        if (err?.status === 401 || err?.response?.status === 401) return null;
+        // No customer linked to auth identity yet — this is expected for test accounts
+        if (err?.status === 404) return null;
+        // Network errors or unexpected failures
+        throw err;
       }
     },
-    retry: false,
-    staleTime: 5 * 60 * 1000,
+    retry: 1,
+    staleTime: 0,
   });
 }
 
@@ -48,10 +53,12 @@ export function useLogin() {
 
   return useMutation({
     mutationFn: async ({ email, password }: LoginInput) => {
-      return authClient.login({ email, password });
+      const token = await authClient.login({ email, password });
+      return token;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.customer.all });
+      // Force immediate refetch — don't wait for stale cache
+      queryClient.refetchQueries({ queryKey: queryKeys.customer.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.cart.all });
     },
   });
@@ -62,10 +69,11 @@ export function useRegister() {
 
   return useMutation({
     mutationFn: async (input: RegisterInput) => {
-      return authClient.register(input);
+      const token = await authClient.register(input);
+      return token;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.customer.all });
+      queryClient.refetchQueries({ queryKey: queryKeys.customer.all });
     },
   });
 }
@@ -109,8 +117,8 @@ export function useLogout() {
       await authClient.logout();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.customer.all });
-      queryClient.invalidateQueries({ queryKey: queryKeys.cart.all });
+      // Force customer to null immediately — don't wait for refetch
+      queryClient.setQueryData(queryKeys.customer.current(), null);
       queryClient.removeQueries({ queryKey: queryKeys.customer.all });
       queryClient.removeQueries({ queryKey: queryKeys.cart.all });
     },

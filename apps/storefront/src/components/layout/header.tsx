@@ -7,6 +7,7 @@ import { OccasionMegaMenu } from "./occasion-mega-menu";
 import { LanguageSwitcher } from "./language-switcher";
 import { MobileNav } from "./mobile-nav";
 import { LoginDialog } from "@/components/auth/login-dialog";
+import { CartDrawer } from "@/components/cart/cart-drawer";
 import { useCustomer, useLogout } from "@/hooks/use-auth";
 
 export function Header() {
@@ -57,9 +58,7 @@ export function Header() {
             </LoginDialog>
           )}
 
-          <Link href="/checkout" className="p-2 relative hover:text-burgundy-600 transition-colors">
-            <ShoppingBag className="w-5 h-5" />
-          </Link>
+          <CartDrawer />
         </div>
       </div>
     </header>
