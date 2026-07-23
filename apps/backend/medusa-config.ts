@@ -71,6 +71,21 @@ module.exports = defineConfig({
                 },
               ]
             : []),
+          ...(process.env.ZALOPAY_APP_ID && process.env.ZALOPAY_KEY1 && process.env.ZALOPAY_KEY2
+            ? [
+                {
+                  resolve: "./src/modules/zalopay",
+                  id: "zalopay",
+                  options: {
+                    appId: process.env.ZALOPAY_APP_ID,
+                    key1: process.env.ZALOPAY_KEY1,
+                    key2: process.env.ZALOPAY_KEY2,
+                    endpoint: process.env.ZALOPAY_ENDPOINT || "https://sandbox.zalopay.vn/v001/tpe",
+                    callbackUrl: process.env.ZALOPAY_CALLBACK_URL || "http://localhost:9000/api/hooks/zalopay",
+                  },
+                },
+              ]
+            : []),
           ...(process.env.MOMO_PARTNER_CODE && process.env.MOMO_ACCESS_KEY && process.env.MOMO_SECRET_KEY
             ? [
                 {
@@ -106,6 +121,17 @@ module.exports = defineConfig({
                     fromDistrictId: parseInt(process.env.GHN_FROM_DISTRICT_ID || "0") || 0,
                     fromWardCode: process.env.GHN_FROM_WARD_CODE || "",
                     endpoint: process.env.GHN_ENDPOINT || "https://dev-online-gateway.ghn.vn/shiip/public-api",
+                  },
+                },
+              ]
+            : []),
+          ...(process.env.GHTK_TOKEN
+            ? [
+                {
+                  resolve: "./src/modules/ghtk",
+                  id: "ghtk",
+                  options: {
+                    token: process.env.GHTK_TOKEN,
                   },
                 },
               ]
