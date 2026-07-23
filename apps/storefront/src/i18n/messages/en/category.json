@@ -1,0 +1,9 @@
+{
+  "filter": "Filter",
+  "sort": "Sort",
+  "priceLow": "Price low → high",
+  "priceHigh": "Price high → low",
+  "newest": "Newest",
+  "deliveryAvailable": "Fast delivery",
+  "clearAll": "Clear all"
+}

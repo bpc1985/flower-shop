@@ -32,3 +32,84 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Custom utility classes for fonts and spacing */
+.font-heading {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+.font-ui {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* Typography scale */
+.text-display {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+}
+.text-h1 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.3;
+}
+.text-h2 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+}
+.text-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Shadow tokens */
+.shadow-card { box-shadow: var(--shadow-card); }
+.shadow-elevated { box-shadow: var(--shadow-elevated); }
+
+/* Colors */
+.bg-cream-100 { background-color: #FFF8F0; }
+.bg-cream-200 { background-color: #FFF2E0; }
+.bg-cream-50 { background-color: #FFFBF5; }
+.text-cream-100 { color: #FFF8F0; }
+.text-cream-200 { color: #FFF2E0; }
+.text-cream-300 { color: #FFE8CC; }
+.text-warm-800 { color: #2D2420; }
+.text-warm-900 { color: #1A1410; }
+.text-sage-500 { color: #9CAF88; }
+.text-sage-600 { color: #7D9468; }
+.text-sage-700 { color: #6B8A5A; }
+.text-burgundy-600 { color: #6B2737; }
+.bg-burgundy-600 { background-color: #6B2737; }
+.bg-burgundy-600\/5 { background-color: rgba(107, 39, 55, 0.05); }
+.bg-sage-500 { background-color: #9CAF88; }
+.bg-sage-500\/5 { background-color: rgba(156, 175, 136, 0.05); }
+.bg-sage-500\/10 { background-color: rgba(156, 175, 136, 0.1); }
+.bg-sage-500\/90 { background-color: rgba(156, 175, 136, 0.9); }
+.border-burgundy-500\/30 { border-color: rgba(107, 39, 55, 0.3); }
+.border-cream-200 { border-color: #FFE8CC; }
+
+.hover\:bg-cream-200:hover { background-color: #FFF2E0; }
+.hover\:bg-sage-600:hover { background-color: #7D9468; }
+.hover\:text-burgundy-600:hover { color: #6B2737; }
+.hover\:text-cream-100:hover { color: #FFF8F0; }
+
+/* Scrollbar hide */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Accordion animation */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+.animate-accordion-down { animation: accordion-down 200ms ease-out; }
+.animate-accordion-up { animation: accordion-up 200ms ease-out; }

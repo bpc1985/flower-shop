@@ -1,15 +1,25 @@
-import { getTranslations } from "next-intl/server";
+import { HeroSection } from "@/components/home/hero-section";
+import { OccasionGrid } from "@/components/home/occasion-grid";
+import { FeaturedCarousel } from "@/components/home/featured-carousel";
+import { EditorialSection } from "@/components/home/editorial-section";
+import { TrustBar } from "@/components/layout/trust-bar";
+import { AnnouncementBar } from "@/components/layout/announcement-bar";
 
-export default async function HomePage() {
-  const t = await getTranslations("home");
+interface HomePageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
+
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <h1 className="font-heading text-4xl md:text-6xl text-warm-900 whitespace-pre-line">
-          {t("hero")}
-        </h1>
-        <p className="text-lg text-warm-800/60">{t("heroSub")}</p>
-      </div>
-    </main>
+    <>
+      <AnnouncementBar />
+      <HeroSection />
+      <OccasionGrid />
+      <FeaturedCarousel />
+      <EditorialSection />
+      <TrustBar locale={locale} />
+    </>
   );
 }

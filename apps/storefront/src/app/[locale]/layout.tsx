@@ -6,6 +6,8 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -43,7 +45,9 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
-            {children}
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer locale={locale} />
             <Toaster position="top-center" richColors />
           </QueryProvider>
         </NextIntlClientProvider>

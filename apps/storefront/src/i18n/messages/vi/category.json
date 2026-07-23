@@ -1,0 +1,9 @@
+{
+  "filter": "Lọc",
+  "sort": "Sắp xếp",
+  "priceLow": "Giá thấp → cao",
+  "priceHigh": "Giá cao → thấp",
+  "newest": "Mới nhất",
+  "deliveryAvailable": "Có giao nhanh",
+  "clearAll": "Xoá bộ lọc"
+}

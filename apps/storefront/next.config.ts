@@ -8,6 +8,7 @@ const config: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "**.medusajs.com" },
       { protocol: "https", hostname: "**.unsplash.com" },
+      { protocol: "https", hostname: "**.placehold.co" },
       { protocol: "http", hostname: "localhost" },
     ],
   },

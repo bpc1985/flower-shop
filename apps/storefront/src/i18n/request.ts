@@ -8,6 +8,11 @@ export default getRequestConfig(async ({ requestLocale }) => {
   }
   return {
     locale,
-    messages: (await import(`./messages/${locale}/common.json`)).default,
+    messages: {
+      common: (await import(`./messages/${locale}/common.json`)).default,
+      home: (await import(`./messages/${locale}/home.json`)).default,
+      product: (await import(`./messages/${locale}/product.json`)).default,
+      category: (await import(`./messages/${locale}/category.json`)).default,
+    },
   };
 });
