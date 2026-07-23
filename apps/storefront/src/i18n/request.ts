@@ -13,6 +13,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       home: (await import(`./messages/${locale}/home.json`)).default,
       product: (await import(`./messages/${locale}/product.json`)).default,
       category: (await import(`./messages/${locale}/category.json`)).default,
+      auth: (await import(`./messages/${locale}/auth.json`)).default,
     },
   };
 });

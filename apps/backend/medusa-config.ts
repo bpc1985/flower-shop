@@ -24,6 +24,34 @@ module.exports = defineConfig({
   },
   modules: [
     {
+      resolve: "@medusajs/medusa/auth",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/auth-emailpass",
+            id: "emailpass",
+          },
+          ...(process.env.GOOGLE_CLIENT_ID
+            ? [
+                {
+                  resolve: "@medusajs/medusa/auth-google",
+                  id: "google",
+                  options: {
+                    clientId: process.env.GOOGLE_CLIENT_ID,
+                    clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+                    callbackUrl: `${process.env.BACKEND_URL || "http://localhost:9000"}/auth/customer/google/callback`,
+                  },
+                },
+              ]
+            : []),
+          {
+            resolve: "./src/modules/phone-otp",
+            id: "phone-otp",
+          },
+        ],
+      },
+    },
+    {
       resolve: "@medusajs/medusa/cache-redis",
       options: { redisUrl: process.env.REDIS_URL },
     },

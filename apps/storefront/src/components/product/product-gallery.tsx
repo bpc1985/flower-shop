@@ -22,6 +22,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 50vw"
           priority
+          loading="eager"
           unoptimized
         />
       </div>

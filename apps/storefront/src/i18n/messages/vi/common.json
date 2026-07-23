@@ -10,6 +10,7 @@
     "search": "Tìm kiếm",
     "cart": "Giỏ hàng",
     "account": "Tài khoản",
-    "login": "Đăng nhập"
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất"
   }
 }

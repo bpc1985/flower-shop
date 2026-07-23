@@ -2,13 +2,17 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Search, ShoppingBag, User } from "lucide-react";
+import { Search, ShoppingBag, User, LogOut } from "lucide-react";
 import { OccasionMegaMenu } from "./occasion-mega-menu";
 import { LanguageSwitcher } from "./language-switcher";
 import { MobileNav } from "./mobile-nav";
+import { LoginDialog } from "@/components/auth/login-dialog";
+import { useCustomer, useLogout } from "@/hooks/use-auth";
 
 export function Header() {
   const t = useTranslations("common");
+  const { data: customer } = useCustomer();
+  const { mutate: logout } = useLogout();
 
   return (
     <header className="sticky top-0 z-50 bg-cream-100/80 backdrop-blur-md border-b border-cream-200">
@@ -31,9 +35,28 @@ export function Header() {
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
-          <Link href="/account" className="hidden sm:block p-2 hover:text-burgundy-600 transition-colors">
-            <User className="w-5 h-5" />
-          </Link>
+
+          {customer ? (
+            <div className="flex items-center gap-1">
+              <Link href="/account" className="hidden sm:block p-2 hover:text-burgundy-600 transition-colors">
+                <User className="w-5 h-5" />
+              </Link>
+              <button
+                onClick={() => logout()}
+                className="p-2 hover:text-burgundy-600 transition-colors"
+                title={t("nav.logout")}
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <LoginDialog>
+              <button className="p-2 hover:text-burgundy-600 transition-colors" title={t("nav.login")}>
+                <User className="w-5 h-5" />
+              </button>
+            </LoginDialog>
+          )}
+
           <Link href="/checkout" className="p-2 relative hover:text-burgundy-600 transition-colors">
             <ShoppingBag className="w-5 h-5" />
           </Link>
