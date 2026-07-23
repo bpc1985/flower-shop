@@ -21,6 +21,17 @@ const envSchema = z.object({
   ESMS_SECRET_KEY: z.string().optional(),
   SPEEDSMS_API_KEY: z.string().optional(),
   SPEEDSMS_SENDER_ID: z.string().optional(),
+  // Payment providers — optional, only needed when using that provider
+  VNPAY_TMN_CODE: z.string().optional(),
+  VNPAY_HASH_SECRET: z.string().optional(),
+  VNPAY_RETURN_URL: z.string().optional(),
+  VNPAY_IPN_URL: z.string().optional(),
+  MOMO_PARTNER_CODE: z.string().optional(),
+  MOMO_ACCESS_KEY: z.string().optional(),
+  MOMO_SECRET_KEY: z.string().optional(),
+  MOMO_PUBLIC_KEY: z.string().optional(),
+  MOMO_RETURN_URL: z.string().optional(),
+  MOMO_IPN_URL: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);
