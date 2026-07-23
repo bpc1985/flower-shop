@@ -1,0 +1,39 @@
+{
+  "name": "@bloom/backend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "medusa develop",
+    "build": "medusa build",
+    "start": "medusa start",
+    "seed": "medusa exec ./src/scripts/seed.ts",
+    "migration:generate": "medusa db:generate",
+    "migration:run": "medusa db:migrate"
+  },
+  "dependencies": {
+    "@medusajs/admin-sdk": "^2.17.2",
+    "@medusajs/admin-shared": "^2.17.2",
+    "@medusajs/auth": "^2.17.0",
+    "@medusajs/cache-redis": "^2.17.0",
+    "@medusajs/dashboard": "^2.17.2",
+    "@medusajs/draft-order": "^2.17.2",
+    "@medusajs/event-bus-redis": "^2.17.0",
+    "@medusajs/file": "^2.17.0",
+    "@medusajs/file-s3": "^2.17.0",
+    "@medusajs/framework": "^2.17.2",
+    "@medusajs/fulfillment": "^2.17.0",
+    "@medusajs/medusa": "^2.17.0",
+    "@medusajs/payment": "^2.17.0",
+    "@medusajs/utils": "^2.17.2",
+    "pg": "^8.13.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "winston": "^3.14.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  }
+}

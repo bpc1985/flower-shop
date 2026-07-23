@@ -1,0 +1,22 @@
+{
+  "site": {
+    "title": "Bloom Wedding",
+    "tagline": "Premium Fresh Flower Shop",
+    "description": "Premium flowers delivered in 90 minutes in Ho Chi Minh City"
+  },
+  "nav": {
+    "occasions": "Occasions",
+    "shop": "Shop",
+    "search": "Search",
+    "cart": "Cart",
+    "account": "Account",
+    "login": "Login"
+  },
+  "home": {
+    "hero": "Sending Love\nThrough Every Bloom",
+    "heroSub": "Premium fresh bouquets, delivered in 90 minutes",
+    "shopOccasions": "Shop by Occasion",
+    "featured": "Featured",
+    "trust": "Our Promise"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "site": {
+    "title": "Bloom Wedding",
+    "tagline": "Cửa Hàng Hoa Tươi Cao Cấp",
+    "description": "Hoa tươi cao cấp giao trong 90 phút tại TP.HCM"
+  },
+  "nav": {
+    "occasions": "Dịp",
+    "shop": "Cửa hàng",
+    "search": "Tìm kiếm",
+    "cart": "Giỏ hàng",
+    "account": "Tài khoản",
+    "login": "Đăng nhập"
+  },
+  "home": {
+    "hero": "Gửi Trao Yêu Thương\nQua Từng Bông Hoa",
+    "heroSub": "Bó hoa tươi cao cấp, giao trong 90 phút",
+    "shopOccasions": "Mua Theo Dịp",
+    "featured": "Nổi bật",
+    "trust": "Cam kết"
+  }
+}

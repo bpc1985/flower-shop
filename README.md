@@ -19,12 +19,59 @@ Premium floral e-commerce platform for Vietnam market. Built with MedusaJS headl
 4. **Vietnam integrations are custom Medusa providers.** No existing plugins. Each is an isolated module (200-500 lines).
 5. **No medusa-react.** Wrap @medusajs/js-sdk in Tanstack Query hooks.
 
+## Getting Started
+
+```bash
+pnpm install
+docker compose up -d    # PostgreSQL + Redis + MinIO
+cp .env.template .env   # Edit with your values
+pnpm dev                # Backend :9000, Storefront :8000
+```
+
+### First-time setup
+
+```bash
+# Run Medusa migrations
+cd apps/backend
+npx medusa db:migrate
+
+# Create admin user
+npx medusa user --email admin@bloomwedding.vn --password use-a-strong-password
+```
+
+### Storefront only (backend must be running)
+
+```bash
+cd apps/storefront
+cp .env.template .env.local
+npx next dev --port 8000
+```
+
+## Architecture
+
+```
+├── apps/
+│   ├── backend/          Medusa 2.x — custom modules for VN payments/shipping/auth
+│   └── storefront/       Next.js 15 App Router — [locale] routing (vi/en)
+├── packages/
+│   └── shared-types/     TypeScript types + Zod schemas
+├── docs/                 Design guidelines, tech stack, wireframes
+└── plans/                Implementation plan (10 phases)
+```
+
 ## Documentation
 
 - `docs/tech-stack.md` — Full technology choices and rationale
 - `docs/design-guidelines.md` — Design tokens, typography, color system
-- `docs/wireframe/` — Interactive HTML wireframes (homepage, category, product-detail, cart, checkout)
+- `docs/wireframe/` — Interactive HTML wireframes
+- `CLAUDE.md` — AI coding guidance
 
-## Getting Started
+## Implementation Status
 
-TBD — Phase 1 will scaffold the monorepo and install dependencies.
+| Phase | Status |
+|-------|--------|
+| Phase 1: Monorepo Scaffold + i18n + Security | ✅ Complete |
+| Phase 2: Backend Core + 50 Products | Pending |
+| Phases 3-10 | Pending |
+
+Full plan: `plans/260723-1305-flower-shop/plan.md`
