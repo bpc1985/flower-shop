@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bó Hồng Đỏ Classic — Bloom Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream-100: #FFF8F0; --cream-200: #FFF2E0; --cream-300: #FFE8CC;
+  --sage-300: #C5D1B8; --sage-400: #B1C1A0; --sage-500: #9CAF88; --sage-600: #7D9468; --sage-700: #637A4F;
+  --blush-200: #F5D9DC; --blush-400: #E8B4B8;
+  --burgundy-600: #6B2737; --burgundy-700: #5A1F2D;
+  --warm-800: #2D2420; --warm-900: #1A1410;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, sans-serif;
+  --shadow-card: 0 2px 12px rgba(107, 39, 55, 0.06);
+  --shadow-card-hover: 0 6px 24px rgba(107, 39, 55, 0.10);
+  --shadow-sticky: 0 -4px 20px rgba(107, 39, 55, 0.10);
+  --radius-lg: 16px; --radius-md: 14px; --radius-xl: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-ui); background: var(--cream-100);
+  color: var(--warm-800); line-height: 1.6; -webkit-font-smoothing: antialiased;
+  padding-bottom: 90px;
+}
+@media (min-width: 1024px) { body { padding-bottom: 0; } }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
+.font-heading { font-family: var(--font-heading); }
+.font-ui { font-family: var(--font-ui); }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 768px) { .container { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .container { padding: 0 2rem; } }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(255,248,240,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-300);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 1rem; max-width: 1280px; margin: 0 auto;
+}
+@media (min-width: 768px) { .header-inner { padding: 0 1.5rem; } }
+.header-back { display: flex; align-items: center; gap: 0.5rem; font: 500 0.875rem var(--font-ui); color: var(--burgundy-600); }
+.header-logo { font: 700 1.5rem/1 var(--font-heading); color: var(--burgundy-600); letter-spacing: -0.02em; }
+.header-actions { display: flex; align-items: center; gap: 0.5rem; }
+.icon-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-200); transition: background 0.2s; position: relative;
+}
+.icon-btn:hover { background: var(--cream-300); }
+.icon-btn svg { width: 20px; height: 20px; color: var(--burgundy-600); }
+.badge-dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--blush-400); }
+
+/* Breadcrumb */
+.breadcrumb { display: flex; gap: 0.25rem; align-items: center; font: 400 0.8125rem var(--font-ui); color: var(--sage-600); padding: 1rem 0 0; }
+.breadcrumb a { color: var(--sage-600); }
+.breadcrumb a:hover { color: var(--burgundy-600); }
+.breadcrumb .current { color: var(--warm-800); }
+
+/* Product Layout */
+.product-layout { padding: 1.5rem 0 3rem; }
+@media (min-width: 1024px) {
+  .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; padding: 2.5rem 0 4rem; }
+}
+
+/* Gallery */
+.gallery { position: relative; }
+.gallery-main {
+  aspect-ratio: 4/5; border-radius: var(--radius-xl); overflow: hidden;
+  background: linear-gradient(135deg, var(--sage-300) 0%, var(--blush-200) 50%, var(--cream-200) 100%);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem;
+}
+.gallery-main-placeholder {
+  font: italic 400 1.25rem var(--font-heading); color: var(--burgundy-600);
+  opacity: 0.5; text-align: center; padding: 2rem;
+}
+.gallery-thumbs { display: flex; gap: 0.5rem; }
+.gallery-thumb {
+  width: 64px; height: 64px; border-radius: var(--radius-md); overflow: hidden; cursor: pointer;
+  background: linear-gradient(135deg, var(--sage-300), var(--blush-200));
+  border: 2px solid transparent; transition: border-color 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-thumb.active { border-color: var(--burgundy-600); }
+.gallery-wishlist {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,248,240,0.9); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform 0.2s;
+}
+.gallery-wishlist:hover { transform: scale(1.1); }
+.gallery-wishlist svg { width: 20px; height: 20px; color: var(--blush-400); }
+
+/* Product Info */
+.product-info { padding-top: 0.5rem; }
+@media (min-width: 1024px) { .product-info { padding-top: 0; position: sticky; top: 80px; } }
+.product-occasion-tag {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  padding: 0.375rem 0.75rem; border-radius: 9999px;
+  background: var(--sage-300); color: var(--sage-700); font: 500 0.75rem var(--font-ui); margin-bottom: 0.75rem;
+}
+.product-title { font: 700 clamp(1.5rem, 3vw, 2.25rem)/1.15 var(--font-heading); color: var(--warm-900); margin-bottom: 0.5rem; }
+.product-rating {
+  display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;
+  font: 400 0.8125rem var(--font-ui); color: var(--sage-600);
+}
+.stars { color: #D4A574; letter-spacing: 2px; }
+.product-price { font: 700 clamp(1.5rem, 2.5vw, 2rem)/1 var(--font-ui); color: var(--burgundy-600); margin-bottom: 1.5rem; }
+.product-price-from { font: 400 0.8125rem var(--font-ui); color: var(--sage-600); }
+.product-short-desc { font: 400 0.9375rem/1.6 var(--font-ui); color: var(--warm-800); margin-bottom: 1.5rem; }
+
+/* Tier Selector */
+.section-label {
+  font: 600 0.8125rem var(--font-ui); text-transform: uppercase;
+  letter-spacing: 0.03em; color: var(--warm-900); margin-bottom: 0.75rem;
+}
+.tier-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 2rem;
+}
+@media (max-width: 480px) { .tier-grid { grid-template-columns: 1fr; } }
+.tier-card {
+  border: 2px solid var(--cream-300); border-radius: var(--radius-lg); padding: 1rem;
+  cursor: pointer; transition: all 0.2s; position: relative; text-align: center;
+  background: var(--cream-100);
+}
+.tier-card:hover { border-color: var(--sage-400); }
+.tier-card.selected { border-color: var(--burgundy-600); background: var(--cream-200); }
+.tier-badge {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  padding: 0.1875rem 0.75rem; border-radius: 9999px;
+  background: var(--blush-400); color: var(--warm-900);
+  font: 600 0.6875rem var(--font-ui); white-space: nowrap;
+}
+.tier-name { font: 600 0.875rem var(--font-heading); color: var(--warm-900); margin-bottom: 0.25rem; }
+.tier-size { font: 400 0.75rem var(--font-ui); color: var(--sage-600); margin-bottom: 0.5rem; }
+.tier-price { font: 700 1.125rem var(--font-ui); color: var(--burgundy-600); }
+.tier-features { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); margin-top: 0.5rem; }
+
+/* Delivery Selector */
+.delivery-chips {
+  display: flex; gap: 0.625rem; overflow-x: auto; scrollbar-width: none;
+  margin-bottom: 0.75rem; -webkit-overflow-scrolling: touch;
+}
+.delivery-chips::-webkit-scrollbar { display: none; }
+.delivery-chip {
+  flex-shrink: 0; padding: 0.625rem 1rem; border-radius: 9999px;
+  font: 500 0.8125rem var(--font-ui); white-space: nowrap;
+  border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--warm-800);
+  transition: all 0.2s; cursor: pointer; display: flex; align-items: center; gap: 0.375rem;
+}
+.delivery-chip:hover { border-color: var(--sage-400); }
+.delivery-chip.selected { background: var(--sage-500); border-color: var(--sage-500); color: var(--warm-900); }
+.delivery-chip .icon { width: 16px; height: 16px; }
+.delivery-info {
+  font: 400 0.75rem var(--font-ui); color: var(--sage-600); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.375rem;
+}
+
+/* What's included */
+.includes-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 2rem;
+}
+.include-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font: 400 0.8125rem var(--font-ui); color: var(--warm-800);
+}
+.include-item svg { width: 18px; height: 18px; color: var(--sage-500); flex-shrink: 0; }
+
+/* Care Tips */
+.care-section {
+  background: var(--cream-200); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 2rem;
+}
+.care-title { font: 600 0.9375rem var(--font-heading); color: var(--warm-900); margin-bottom: 0.5rem; }
+.care-text { font: 400 0.8125rem/1.5 var(--font-ui); color: var(--warm-800); }
+
+/* Quantity */
+.qty-selector { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+.qty-btn {
+  width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream-300);
+  display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--warm-800);
+  transition: all 0.15s;
+}
+.qty-btn:hover { border-color: var(--sage-500); color: var(--burgundy-600); }
+.qty-value { font: 600 1.125rem var(--font-ui); color: var(--warm-900); min-width: 32px; text-align: center; }
+
+/* Add to cart */
+.btn-add-cart {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  width: 100%; padding: 1rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 600 1rem var(--font-ui); transition: background 0.2s; min-height: 52px;
+}
+.btn-add-cart:hover { background: var(--sage-400); }
+
+/* Trust signals inline */
+.trust-inline {
+  display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.25rem;
+  padding-top: 1.25rem; border-top: 1px solid var(--cream-300);
+}
+.trust-inline-item {
+  display: flex; align-items: center; gap: 0.375rem;
+  font: 400 0.75rem var(--font-ui); color: var(--sage-600);
+}
+.trust-inline-item svg { width: 16px; height: 16px; color: var(--sage-500); }
+
+/* Sticky Mobile CTA */
+.sticky-cta {
+  display: flex;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,248,240,0.96); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--cream-300); padding: 0.75rem 1rem;
+  z-index: 50; gap: 0.75rem; align-items: center;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 1024px) { .sticky-cta { display: none; } }
+.sticky-price { font: 700 1.125rem var(--font-ui); color: var(--burgundy-600); white-space: nowrap; }
+.sticky-tier { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); }
+.sticky-add {
+  flex: 1; padding: 0.75rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 600 0.9375rem var(--font-ui); text-align: center; min-height: 48px;
+}
+
+/* Reviews Section */
+.reviews-section { padding: 3rem 0; }
+@media (min-width: 768px) { .reviews-section { padding: 4rem 0; } }
+.review-summary { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.review-score { font: 700 2.5rem var(--font-heading); color: var(--warm-900); }
+.review-count { font: 400 0.875rem var(--font-ui); color: var(--sage-600); }
+.review-card {
+  background: var(--cream-200); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 0.75rem;
+}
+.review-author { font: 600 0.875rem var(--font-ui); color: var(--warm-900); margin-bottom: 0.25rem; }
+.review-date { font: 400 0.75rem var(--font-ui); color: var(--sage-600); margin-left: 0.5rem; }
+.review-text { font: 400 0.875rem/1.5 var(--font-ui); color: var(--warm-800); margin-top: 0.5rem; }
+
+/* Similar Products */
+.similar-section { padding: 2rem 0 4rem; border-top: 1px solid var(--cream-300); }
+.similar-grid { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 1rem; }
+.similar-grid::-webkit-scrollbar { display: none; }
+.similar-card {
+  flex: 0 0 60vw; max-width: 220px;
+  border-radius: var(--radius-lg); overflow: hidden; background: var(--cream-100);
+  box-shadow: var(--shadow-card); scroll-snap-align: start; cursor: pointer;
+}
+@media (min-width: 768px) { .similar-card { flex: 0 0 220px; } }
+.similar-image {
+  aspect-ratio: 4/5; background: linear-gradient(135deg, var(--sage-300), var(--blush-200));
+  display: flex; align-items: center; justify-content: center;
+}
+.similar-name { font: 500 0.875rem var(--font-heading); color: var(--warm-900); padding: 0.75rem 0.75rem 0.25rem; }
+.similar-price { font: 600 0.8125rem var(--font-ui); color: var(--burgundy-600); padding: 0 0.75rem 0.75rem; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/category.html" class="header-back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Danh mục
+    </a>
+    <a href="/" class="header-logo">Bloom</a>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Chia sẻ">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Giỏ hàng" onclick="location.href='/cart.html'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="/">Trang chủ</a><span>/</span><a href="/category.html">Hoa sinh nhật</a><span>/</span><span class="current">Bó Hồng Đỏ Classic</span>
+  </nav>
+</div>
+
+<!-- ===== PRODUCT LAYOUT ===== -->
+<div class="container">
+  <div class="product-layout">
+
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="gallery-main">
+        <span class="gallery-main-placeholder">✦ Bó Hồng Đỏ Classic ✦<br><small>12 bông hồng đỏ Đà Lạt</small></span>
+      </div>
+      <div class="gallery-thumbs">
+        <div class="gallery-thumb active"><span style="font-size:0.625rem;color:var(--burgundy-600);opacity:0.5">Ảnh 1</span></div>
+        <div class="gallery-thumb"><span style="font-size:0.625rem;color:var(--burgundy-600);opacity:0.5">Ảnh 2</span></div>
+        <div class="gallery-thumb"><span style="font-size:0.625rem;color:var(--burgundy-600);opacity:0.5">Ảnh 3</span></div>
+        <div class="gallery-thumb"><span style="font-size:0.625rem;color:var(--burgundy-600);opacity:0.5">Ảnh 4</span></div>
+      </div>
+      <button class="gallery-wishlist" aria-label="Thêm vào yêu thích">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <span class="product-occasion-tag">🎂 Sinh Nhật</span>
+      <h1 class="product-title">Bó Hồng Đỏ Classic</h1>
+      <div class="product-rating">
+        <span class="stars">★★★★★</span> 4.9 (128 đánh giá) <span style="margin-left:0.5rem;">&bull;</span> Đã bán 2,400+
+      </div>
+      <div class="product-price" id="displayPrice">450.000₫</div>
+      <p class="product-price-from">Giá đã bao gồm thiệp & giao hàng</p>
+      <p class="product-short-desc">
+        Bó hồng đỏ Đà Lạt 12 bông — gói trong giấy Kraft cao cấp, kèm thiệp viết tay miễn phí.
+        Món quà hoàn hảo cho sinh nhật người thân yêu.
+      </p>
+
+      <!-- Tier Selector -->
+      <div class="section-label">Chọn gói hoa</div>
+      <div class="tier-grid" id="tierSelector">
+        <div class="tier-card" data-tier="standard" data-price="450.000₫">
+          <div class="tier-name">Standard</div>
+          <div class="tier-size">8 bông hồng</div>
+          <div class="tier-price">450.000₫</div>
+          <div class="tier-features">Giấy Kraft + thiệp</div>
+        </div>
+        <div class="tier-card selected" data-tier="premium" data-price="680.000₫">
+          <span class="tier-badge">Phổ biến nhất</span>
+          <div class="tier-name">Premium</div>
+          <div class="tier-size">12 bông hồng</div>
+          <div class="tier-price">680.000₫</div>
+          <div class="tier-features">Giấy Kraft + ruy băng + thiệp + ảnh xác nhận</div>
+        </div>
+        <div class="tier-card" data-tier="deluxe" data-price="990.000₫">
+          <div class="tier-name">Deluxe</div>
+          <div class="tier-size">18 bông hồng</div>
+          <div class="tier-price">990.000₫</div>
+          <div class="tier-features">Hộp quà + ruy băng + thiệp + socola + ảnh xác nhận</div>
+        </div>
+      </div>
+
+      <!-- Delivery Selector -->
+      <div class="section-label">Thời gian giao</div>
+      <div class="delivery-chips" id="deliveryChips">
+        <button class="delivery-chip selected" data-delivery="asap">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Giao ngay (90 phút)
+        </button>
+        <button class="delivery-chip" data-delivery="today">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Hôm nay (trước 17h)
+        </button>
+        <button class="delivery-chip" data-delivery="tomorrow">
+          Ngày mai
+        </button>
+        <button class="delivery-chip" data-delivery="pick">
+          Chọn ngày
+        </button>
+      </div>
+      <p class="delivery-info">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Dự kiến giao: 14:30 - 15:00 hôm nay
+      </p>
+
+      <!-- Quantity -->
+      <div class="section-label">Số lượng</div>
+      <div class="qty-selector">
+        <button class="qty-btn" id="qtyMinus">−</button>
+        <span class="qty-value" id="qtyValue">1</span>
+        <button class="qty-btn" id="qtyPlus">+</button>
+      </div>
+
+      <!-- Add to Cart (Desktop) -->
+      <button class="btn-add-cart" id="addToCart" style="display:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Thêm vào giỏ — 680.000₫
+      </button>
+
+      <!-- Trust inline -->
+      <div class="trust-inline">
+        <span class="trust-inline-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Giao 90 phút
+        </span>
+        <span class="trust-inline-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Ảnh giống 90%
+        </span>
+        <span class="trust-inline-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Thiệp miễn phí
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- What's Included + Care Tips -->
+<div class="container" style="max-width:800px;">
+  <div class="section-label" style="margin-bottom:0.75rem;">Bao gồm trong mỗi đơn hàng</div>
+  <div class="includes-grid">
+    <div class="include-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Thiệp viết tay miễn phí
+    </div>
+    <div class="include-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Ảnh chụp xác nhận trước giao
+    </div>
+    <div class="include-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Gói quà cao cấp
+    </div>
+    <div class="include-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Hướng dẫn chăm sóc hoa
+    </div>
+  </div>
+
+  <div class="care-section">
+    <div class="care-title">🌿 Cách chăm sóc hoa tươi lâu</div>
+    <p class="care-text">
+      Cắt gốc 45 độ, thay nước mỗi 2 ngày, để nơi thoáng mát tránh ánh nắng trực tiếp.
+      Hoa của bạn sẽ tươi từ 5-7 ngày nếu được chăm sóc đúng cách.
+    </p>
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="reviews-section">
+  <div class="container" style="max-width:800px;">
+    <div class="review-summary">
+      <div class="review-score">4.9</div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <div class="review-count">128 đánh giá từ khách hàng</div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-author">Nguyễn Minh T. <span class="review-date">2 ngày trước</span></div>
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Hoa tươi, đẹp y như ảnh. Shop gửi ảnh xác nhận trước khi giao, rất yên tâm. Sẽ ủng hộ dài dài!</p>
+    </div>
+    <div class="review-card">
+      <div class="review-author">Trần Hồng N. <span class="review-date">1 tuần trước</span></div>
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Đặt gấp sinh nhật bạn gái, giao đúng 90 phút. Bó hoa gói đẹp, thiệp viết tay dễ thương. 10 điểm!</p>
+    </div>
+    <div class="review-card">
+      <div class="review-author">Lê Văn K. <span class="review-date">2 tuần trước</span></div>
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">Hoa đẹp, giao đúng giờ. Chỉ tiếc là màu hơi nhạt hơn trong ảnh một chút. Nhìn chung vẫn rất hài lòng.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Similar Products -->
+<div class="similar-section">
+  <div class="container">
+    <h3 class="font-heading" style="font-size:1.5rem;font-weight:600;color:var(--warm-900);margin-bottom:1.25rem;">Có thể bạn cũng thích</h3>
+    <div class="similar-grid">
+      <div class="similar-card">
+        <div class="similar-image"><span style="font-size:0.75rem;color:var(--burgundy-600);opacity:0.5">Bó hồng pastel</span></div>
+        <div class="similar-name">Dịu Dàng Pastel</div>
+        <div class="similar-price">520.000₫</div>
+      </div>
+      <div class="similar-card">
+        <div class="similar-image"><span style="font-size:0.75rem;color:var(--burgundy-600);opacity:0.5">Giỏ hoa</span></div>
+        <div class="similar-name">Giỏ Hoa Bừng Sáng</div>
+        <div class="similar-price">680.000₫</div>
+      </div>
+      <div class="similar-card">
+        <div class="similar-image"><span style="font-size:0.75rem;color:var(--burgundy-600);opacity:0.5">Tulip</span></div>
+        <div class="similar-name">Tulip Hà Lan</div>
+        <div class="similar-price">550.000₫</div>
+      </div>
+      <div class="similar-card">
+        <div class="similar-image"><span style="font-size:0.75rem;color:var(--burgundy-600);opacity:0.5">Hộp hoa</span></div>
+        <div class="similar-name">Hộp Hồng Ecuador</div>
+        <div class="similar-price">1.250.000₫</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta">
+  <div>
+    <div class="sticky-price" id="stickyPrice">680.000₫</div>
+    <div class="sticky-tier" id="stickyTier">Premium &bull; 12 bông</div>
+  </div>
+  <button class="sticky-add" id="stickyAdd">Thêm vào giỏ</button>
+</div>
+
+<script>
+// Desktop Add to Cart visibility
+const addToCart = document.getElementById('addToCart');
+if (window.matchMedia('(min-width: 1024px)').matches) {
+  addToCart.style.display = 'flex';
+}
+window.matchMedia('(min-width: 1024px)').addEventListener('change', function(e) {
+  addToCart.style.display = e.matches ? 'flex' : 'none';
+});
+
+// Tier selection
+const tierCards = document.querySelectorAll('.tier-card');
+const displayPrice = document.getElementById('displayPrice');
+const stickyPrice = document.getElementById('stickyPrice');
+const stickyTier = document.getElementById('stickyTier');
+const cartText = addToCart;
+const stickyAdd = document.getElementById('stickyAdd');
+
+tierCards.forEach(card => {
+  card.addEventListener('click', function() {
+    tierCards.forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+    const price = this.dataset.price;
+    const tier = this.dataset.tier;
+    const name = this.querySelector('.tier-name').textContent;
+    const size = this.querySelector('.tier-size').textContent;
+
+    displayPrice.textContent = price;
+    stickyPrice.textContent = price;
+    stickyTier.textContent = name + ' • ' + size;
+    cartText.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Thêm vào giỏ — ${price}`;
+  });
+});
+
+// Delivery chips
+const deliveryChips = document.querySelectorAll('.delivery-chip');
+deliveryChips.forEach(chip => {
+  chip.addEventListener('click', function() {
+    deliveryChips.forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+// Quantity
+let qty = 1;
+document.getElementById('qtyMinus').addEventListener('click', () => {
+  if (qty > 1) { qty--; document.getElementById('qtyValue').textContent = qty; }
+});
+document.getElementById('qtyPlus').addEventListener('click', () => {
+  qty++; document.getElementById('qtyValue').textContent = qty;
+});
+
+// Gallery thumbs
+document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+  thumb.addEventListener('click', function() {
+    document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Add to cart actions
+function addToCartAction() {
+  const selectedTier = document.querySelector('.tier-card.selected');
+  const tierName = selectedTier?.querySelector('.tier-name')?.textContent || 'Premium';
+  alert('Đã thêm vào giỏ: Bó Hồng Đỏ Classic — ' + tierName + ' (' + selectedTier?.dataset.price + ') x' + qty);
+  window.location.href = '/cart.html';
+}
+cartText.addEventListener('click', addToCartAction);
+stickyAdd.addEventListener('click', addToCartAction);
+</script>
+
+</body>
+</html>

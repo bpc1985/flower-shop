@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh Mục Hoa — Bloom Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ===== SHARED TOKENS (same as homepage) ===== */
+:root {
+  --cream-100: #FFF8F0;
+  --cream-200: #FFF2E0;
+  --cream-300: #FFE8CC;
+  --sage-300: #C5D1B8;
+  --sage-400: #B1C1A0;
+  --sage-500: #9CAF88;
+  --sage-600: #7D9468;
+  --sage-700: #637A4F;
+  --blush-200: #F5D9DC;
+  --blush-400: #E8B4B8;
+  --burgundy-600: #6B2737;
+  --burgundy-700: #5A1F2D;
+  --warm-800: #2D2420;
+  --warm-900: #1A1410;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, sans-serif;
+  --shadow-card: 0 2px 12px rgba(107, 39, 55, 0.06);
+  --shadow-card-hover: 0 6px 24px rgba(107, 39, 55, 0.10);
+  --radius-lg: 16px;
+  --radius-md: 14px;
+  --radius-xl: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-ui); background: var(--cream-100);
+  color: var(--warm-800); line-height: 1.6; -webkit-font-smoothing: antialiased;
+  padding-bottom: 72px;
+}
+@media (min-width: 768px) { body { padding-bottom: 0; } }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
+.font-heading { font-family: var(--font-heading); }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 768px) { .container { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .container { padding: 0 2rem; } }
+
+/* ===== HEADER ===== */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,248,240,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-300);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 1rem; max-width: 1280px; margin: 0 auto;
+}
+@media (min-width: 768px) { .header-inner { padding: 0 1.5rem; } }
+.header-logo { font: 700 1.5rem/1 var(--font-heading); color: var(--burgundy-600); letter-spacing: -0.02em; }
+.header-back { display: flex; align-items: center; gap: 0.5rem; font: 500 0.875rem var(--font-ui); color: var(--burgundy-600); }
+.header-actions { display: flex; align-items: center; gap: 0.5rem; }
+.icon-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-200); transition: background 0.2s; position: relative;
+}
+.icon-btn:hover { background: var(--cream-300); }
+.icon-btn svg { width: 20px; height: 20px; color: var(--burgundy-600); }
+.badge-dot {
+  position: absolute; top: 6px; right: 6px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--blush-400);
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header { padding: 1.5rem 0; }
+.page-title { font: 700 clamp(1.5rem, 3vw, 2.5rem)/1.2 var(--font-heading); color: var(--warm-900); }
+.page-subtitle { font: 400 0.9375rem var(--font-ui); color: var(--sage-600); margin-top: 0.25rem; }
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex; gap: 0.625rem; overflow-x: auto;
+  scrollbar-width: none; padding-bottom: 1rem; align-items: center;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-chip {
+  flex-shrink: 0; padding: 0.5rem 1rem; border-radius: 9999px;
+  font: 500 0.8125rem var(--font-ui); white-space: nowrap;
+  border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--warm-800);
+  transition: all 0.2s; cursor: pointer;
+}
+.filter-chip:hover { border-color: var(--sage-400); }
+.filter-chip.active { background: var(--sage-500); border-color: var(--sage-500); color: var(--warm-900); }
+.filter-chip.price-chip { display: flex; align-items: center; gap: 0.375rem; }
+.filter-divider { width: 1px; height: 24px; background: var(--cream-300); flex-shrink: 0; }
+.filter-sort {
+  flex-shrink: 0; display: flex; align-items: center; gap: 0.25rem;
+  padding: 0.5rem 1rem; border-radius: 9999px;
+  font: 500 0.8125rem var(--font-ui); white-space: nowrap; color: var(--burgundy-600);
+  border: 1px solid var(--burgundy-600); cursor: pointer;
+}
+
+/* ===== PRODUCT COUNT ===== */
+.result-count { font: 400 0.8125rem var(--font-ui); color: var(--sage-600); margin-bottom: 1rem; }
+
+/* ===== PRODUCT GRID ===== */
+.products-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+}
+@media (min-width: 640px) { .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+@media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+.product-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--cream-100); box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s, transform 0.3s; cursor: pointer;
+}
+.product-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+.product-image {
+  aspect-ratio: 4/5; overflow: hidden; position: relative;
+  background: linear-gradient(135deg, var(--sage-300) 0%, var(--blush-200) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.product-image-dot {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,248,240,0.85); display: flex; align-items: center; justify-content: center;
+}
+.product-image-dot svg { width: 18px; height: 18px; color: var(--blush-400); }
+.product-badge {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  padding: 0.25rem 0.625rem; border-radius: 9999px;
+  font: 500 0.6875rem var(--font-ui); letter-spacing: 0.02em;
+}
+.product-badge.new { background: var(--sage-400); color: var(--warm-900); }
+.product-badge.sale { background: var(--blush-400); color: var(--warm-900); }
+.product-badge.bestseller { background: var(--burgundy-600); color: var(--cream-100); }
+.product-info { padding: 1rem; }
+.product-occasion { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.25rem; }
+.product-name { font: 500 clamp(0.9375rem, 1.5vw, 1.1rem)/1.3 var(--font-heading); color: var(--warm-900); margin-bottom: 0.25rem; }
+.product-price { font: 700 1.0625rem var(--font-ui); color: var(--burgundy-600); }
+.product-from { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); }
+.product-tiers { display: flex; gap: 0.375rem; margin-top: 0.5rem; flex-wrap: wrap; }
+.tier-chip {
+  padding: 0.1875rem 0.5rem; border-radius: 9999px;
+  font: 400 0.6875rem var(--font-ui);
+  background: var(--sage-300); color: var(--sage-700); opacity: 0.5;
+}
+
+/* ===== QUICK FILTER DRAWER (Mobile) ===== */
+.filter-overlay {
+  position: fixed; inset: 0; background: rgba(26,20,16,0.3);
+  z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.filter-overlay.open { opacity: 1; pointer-events: auto; }
+.filter-drawer {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--cream-100); z-index: 70;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 1.5rem; max-height: 70vh; overflow-y: auto;
+  transform: translateY(100%); transition: transform 0.3s ease-out;
+}
+.filter-drawer.open { transform: translateY(0); }
+.filter-drawer-handle {
+  width: 40px; height: 4px; border-radius: 2px;
+  background: var(--cream-300); margin: 0 auto 1.25rem;
+}
+.filter-section { margin-bottom: 1.5rem; }
+.filter-section-title { font: 600 0.875rem var(--font-ui); color: var(--warm-900); margin-bottom: 0.75rem; }
+.filter-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.filter-tag {
+  padding: 0.5rem 1rem; border-radius: 9999px;
+  font: 400 0.8125rem var(--font-ui);
+  border: 1px solid var(--cream-300); color: var(--warm-800);
+  transition: all 0.15s; cursor: pointer;
+}
+.filter-tag:hover { border-color: var(--sage-400); }
+.filter-tag.selected { background: var(--sage-500); border-color: var(--sage-500); color: var(--warm-900); }
+.price-range { display: flex; gap: 0.75rem; align-items: center; }
+.price-input {
+  flex: 1; padding: 0.625rem 0.75rem; border-radius: var(--radius-md);
+  border: 1px solid var(--cream-300); background: var(--cream-100);
+  font: 400 0.875rem var(--font-ui); color: var(--warm-800);
+}
+.price-input:focus { outline: none; border-color: var(--sage-500); }
+.filter-actions { display: flex; gap: 0.75rem; margin-top: 1rem; }
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 500 0.875rem/1 var(--font-ui); transition: background 0.2s; min-height: 44px;
+}
+.btn-primary:hover { background: var(--sage-400); }
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: var(--radius-md);
+  font: 500 0.875rem/1 var(--font-ui); color: var(--sage-600); min-height: 44px;
+}
+.btn-ghost:hover { color: var(--burgundy-600); }
+.btn-block { width: 100%; }
+.flex-1 { flex: 1; }
+
+/* ===== LOAD MORE ===== */
+.load-more { text-align: center; padding: 2rem 0 4rem; }
+
+/* ===== MOBILE BOTTOM NAV ===== */
+.mobile-nav {
+  display: flex;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,248,240,0.95); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--cream-300);
+  padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
+  z-index: 50; justify-content: space-around;
+}
+@media (min-width: 768px) { .mobile-nav { display: none; } }
+.mobile-nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+  font: 400 0.625rem var(--font-ui); color: var(--sage-600); padding: 0.25rem;
+}
+.mobile-nav-item.active { color: var(--burgundy-600); }
+.mobile-nav-item svg { width: 22px; height: 22px; }
+
+/* Breadcrumb */
+.breadcrumb { display: flex; gap: 0.25rem; align-items: center; font: 400 0.8125rem var(--font-ui); color: var(--sage-600); padding: 1rem 0 0; }
+.breadcrumb a { color: var(--sage-600); transition: color 0.15s; }
+.breadcrumb a:hover { color: var(--burgundy-600); }
+.breadcrumb .current { color: var(--warm-800); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="header-back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Quay lại
+    </a>
+    <a href="/" class="header-logo">Bloom</a>
+    <div class="header-actions">
+      <button class="icon-btn" id="filterBtn" aria-label="Bộ lọc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        <span class="badge-dot" id="filterActiveDot" style="display:none"></span>
+      </button>
+      <button class="icon-btn" aria-label="Giỏ hàng" onclick="location.href='/cart.html'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="container">
+  <nav class="breadcrumb">
+    <a href="/">Trang chủ</a>
+    <span>/</span>
+    <a href="#">Hoa tươi</a>
+    <span>/</span>
+    <span class="current">Sinh nhật</span>
+  </nav>
+</div>
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="container">
+  <div class="page-header">
+    <h1 class="page-title">Hoa Sinh Nhật</h1>
+    <p class="page-subtitle">48 mẫu hoa — Giao trong 90 phút</p>
+  </div>
+</div>
+
+<!-- ===== HORIZONTAL SUBCATEGORY CHIPS ===== -->
+<div class="container">
+  <div class="filter-bar" style="margin-bottom:0.5rem;">
+    <button class="filter-chip active">Tất cả</button>
+    <button class="filter-chip">Bó hoa</button>
+    <button class="filter-chip">Giỏ hoa</button>
+    <button class="filter-chip">Hộp hoa</button>
+    <button class="filter-chip">Lẵng hoa</button>
+    <span class="filter-divider"></span>
+    <button class="filter-sort" id="sortBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="16" y2="6"/><line x1="6" y1="12" x2="14" y2="12"/><line x1="8" y1="18" x2="12" y2="18"/></svg>
+      Phổ biến
+    </button>
+  </div>
+</div>
+
+<!-- ===== PRICE QUICK FILTERS ===== -->
+<div class="container">
+  <div class="filter-bar">
+    <button class="filter-chip">Dưới 500K</button>
+    <button class="filter-chip">500K - 1Tr</button>
+    <button class="filter-chip">1Tr - 2Tr</button>
+    <button class="filter-chip price-chip">Trên 2Tr</button>
+    <span class="filter-divider"></span>
+    <button class="filter-chip">Có sẵn hôm nay</button>
+    <button class="filter-chip">Giảm giá</button>
+  </div>
+</div>
+
+<!-- ===== PRODUCT GRID ===== -->
+<div class="container">
+  <p class="result-count">Hiển thị 1–8 trong 48 sản phẩm</p>
+</div>
+
+<div class="container">
+  <div class="products-grid">
+    <!-- Product 1 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hồng đỏ</span>
+        <span class="product-badge bestseller">Best Seller</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Bó Hồng Đỏ Classic</h3>
+        <p class="product-from">Từ <span class="product-price">450.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 2 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hồng pastel</span>
+        <span class="product-badge sale">-15%</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Dịu Dàng Pastel</h3>
+        <p class="product-from">Từ <span class="product-price">520.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 3 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Giỏ hoa</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Giỏ Hoa Bừng Sáng</h3>
+        <p class="product-from">Từ <span class="product-price">680.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 4 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Hộp hoa</span>
+        <span class="product-badge new">Mới</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Hộp Hồng Ecuador</h3>
+        <p class="product-from">Từ <span class="product-price">1.250.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 5 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hoa mix</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Nắng Vàng Rực Rỡ</h3>
+        <p class="product-from">Từ <span class="product-price">420.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 6 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Lẵng hoa</span>
+        <span class="product-badge bestseller">Hot</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Lẵng Hoa Happy Birthday</h3>
+        <p class="product-from">Từ <span class="product-price">890.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 7 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó tulip</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">Tulip Hà Lan</h3>
+        <p class="product-from">Từ <span class="product-price">550.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+    <!-- Product 8 -->
+    <a href="/product-detail.html" class="product-card">
+      <div class="product-image">
+        <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hoa hồng</span>
+        <span class="product-badge sale">-20%</span>
+        <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      </div>
+      <div class="product-info">
+        <p class="product-occasion">Sinh Nhật</p>
+        <h3 class="product-name">99 Đóa Hồng Đỏ</h3>
+        <p class="product-from">Từ <span class="product-price">1.450.000₫</span></p>
+        <div class="product-tiers">
+          <span class="tier-chip">Standard</span>
+          <span class="tier-chip">Premium</span>
+          <span class="tier-chip">Deluxe</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div class="load-more">
+    <button class="btn-primary" style="min-width:200px;">Xem thêm sản phẩm</button>
+  </div>
+</div>
+
+<!-- ===== FILTER DRAWER ===== -->
+<div class="filter-overlay" id="filterOverlay"></div>
+<div class="filter-drawer" id="filterDrawer">
+  <div class="filter-drawer-handle"></div>
+  <h3 style="font:600 1.25rem var(--font-heading);color:var(--warm-900);margin-bottom:1.5rem;">Bộ lọc</h3>
+  <div class="filter-section">
+    <div class="filter-section-title">Loại hoa</div>
+    <div class="filter-tags">
+      <span class="filter-tag selected">Tất cả</span>
+      <span class="filter-tag">Bó hoa</span>
+      <span class="filter-tag">Giỏ hoa</span>
+      <span class="filter-tag">Hộp hoa</span>
+      <span class="filter-tag">Lẵng hoa</span>
+      <span class="filter-tag">Hoa hồng</span>
+      <span class="filter-tag">Hoa hướng dương</span>
+    </div>
+  </div>
+  <div class="filter-section">
+    <div class="filter-section-title">Khoảng giá</div>
+    <div class="price-range">
+      <input type="number" class="price-input" placeholder="Từ" value="">
+      <span style="color:var(--sage-600)">—</span>
+      <input type="number" class="price-input" placeholder="Đến" value="">
+    </div>
+  </div>
+  <div class="filter-section">
+    <div class="filter-section-title">Dịp tặng</div>
+    <div class="filter-tags">
+      <span class="filter-tag selected">Sinh nhật</span>
+      <span class="filter-tag">Kỷ niệm</span>
+      <span class="filter-tag">Valentine</span>
+      <span class="filter-tag">Ngày của Mẹ</span>
+      <span class="filter-tag">8/3</span>
+      <span class="filter-tag">20/10</span>
+    </div>
+  </div>
+  <div class="filter-section">
+    <div class="filter-section-title">Giao hàng</div>
+    <div class="filter-tags">
+      <span class="filter-tag">Giao ngay (90 phút)</span>
+      <span class="filter-tag">Giao hôm nay</span>
+      <span class="filter-tag">Giao ngày mai</span>
+    </div>
+  </div>
+  <div class="filter-actions">
+    <button class="btn-ghost flex-1">Xóa bộ lọc</button>
+    <button class="btn-primary flex-1" id="applyFilter">Áp dụng (48)</button>
+  </div>
+</div>
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<nav class="mobile-nav">
+  <a href="/" class="mobile-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Trang chủ
+  </a>
+  <a href="/category.html" class="mobile-nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Danh mục
+  </a>
+  <a href="/cart.html" class="mobile-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Giỏ hàng
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Tài khoản
+  </a>
+</nav>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Filter drawer
+const filterBtn = document.getElementById('filterBtn');
+const filterOverlay = document.getElementById('filterOverlay');
+const filterDrawer = document.getElementById('filterDrawer');
+const applyFilter = document.getElementById('applyFilter');
+
+function openFilter() {
+  filterDrawer.classList.add('open');
+  filterOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeFilter() {
+  filterDrawer.classList.remove('open');
+  filterOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+filterBtn.addEventListener('click', openFilter);
+filterOverlay.addEventListener('click', closeFilter);
+applyFilter.addEventListener('click', closeFilter);
+
+// Filter tags toggle
+document.querySelectorAll('.filter-tag').forEach(tag => {
+  tag.addEventListener('click', function() {
+    const parent = this.parentElement;
+    // Single-select mode for each section
+    parent.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('selected'));
+    this.classList.add('selected');
+    document.getElementById('filterActiveDot').style.display = 'block';
+  });
+});
+
+// Quick filter chips
+document.querySelectorAll('.filter-chip:not(.price-chip)').forEach(chip => {
+  chip.addEventListener('click', function() {
+    if (this.classList.contains('active')) {
+      this.classList.remove('active');
+    } else {
+      // Allow multi-select for these
+      this.classList.toggle('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Wedding — Cửa Hàng Hoa Tươi Cao Cấp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --cream-100: #FFF8F0;
+  --cream-200: #FFF2E0;
+  --cream-300: #FFE8CC;
+  --sage-300: #C5D1B8;
+  --sage-400: #B1C1A0;
+  --sage-500: #9CAF88;
+  --sage-600: #7D9468;
+  --blush-200: #F5D9DC;
+  --blush-400: #E8B4B8;
+  --burgundy-600: #6B2737;
+  --burgundy-700: #5A1F2D;
+  --warm-800: #2D2420;
+  --warm-900: #1A1410;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, sans-serif;
+  --shadow-card: 0 2px 12px rgba(107, 39, 55, 0.06);
+  --shadow-card-hover: 0 6px 24px rgba(107, 39, 55, 0.10);
+  --shadow-elevated: 0 8px 32px rgba(107, 39, 55, 0.08);
+  --radius-lg: 16px;
+  --radius-md: 14px;
+  --radius-xl: 20px;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-ui);
+  background: var(--cream-100);
+  color: var(--warm-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
+
+/* ===== TYPOGRAPHY HELPERS ===== */
+.font-heading { font-family: var(--font-heading); }
+.font-ui { font-family: var(--font-ui); }
+.text-display { font: 700 clamp(2.5rem, 5vw, 4.5rem)/1.1 var(--font-heading); }
+.text-h1 { font: 700 clamp(2rem, 4vw, 3.5rem)/1.15 var(--font-heading); }
+.text-h2 { font: 600 clamp(1.5rem, 3vw, 2.5rem)/1.2 var(--font-heading); }
+.text-h3 { font: 600 clamp(1.25rem, 2vw, 1.75rem)/1.3 var(--font-heading); }
+.text-h4 { font: 500 clamp(1.1rem, 1.5vw, 1.25rem)/1.35 var(--font-heading); }
+.text-body { font: 400 1rem/1.6 var(--font-ui); }
+.text-body-sm { font: 400 0.875rem/1.5 var(--font-ui); }
+.text-caption { font: 400 0.75rem/1.4 var(--font-ui); letter-spacing: 0.02em; }
+.text-label { font: 500 0.8125rem/1.4 var(--font-ui); letter-spacing: 0.03em; text-transform: uppercase; }
+.text-price { font: 700 clamp(1.25rem, 2vw, 1.75rem)/1.2 var(--font-ui); }
+
+/* ===== LAYOUT ===== */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 768px) { .container { padding: 0 1.5rem; } }
+@media (min-width: 1024px) { .container { padding: 0 2rem; } }
+.section { padding: 4rem 0; }
+@media (min-width: 768px) { .section { padding: 6rem 0; } }
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 500 0.875rem/1 var(--font-ui); transition: background 0.2s;
+  min-height: 44px; min-width: 44px;
+}
+.btn-primary:hover { background: var(--sage-400); }
+.btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: var(--radius-md);
+  border: 2px solid var(--burgundy-600); color: var(--burgundy-600);
+  font: 500 0.875rem/1 var(--font-ui); transition: all 0.2s;
+  min-height: 44px; min-width: 44px;
+}
+.btn-outline:hover { background: var(--burgundy-600); color: var(--cream-100); }
+.btn-block { width: 100%; }
+
+/* ===== HEADER ===== */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,248,240,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-300);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 1rem; max-width: 1280px; margin: 0 auto;
+}
+@media (min-width: 768px) { .header-inner { padding: 0 1.5rem; } }
+.header-logo {
+  font: 700 1.5rem/1 var(--font-heading); color: var(--burgundy-600);
+  letter-spacing: -0.02em;
+}
+.header-actions { display: flex; align-items: center; gap: 0.5rem; }
+.icon-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--cream-200); transition: background 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--cream-300); }
+.icon-btn svg { width: 20px; height: 20px; color: var(--burgundy-600); }
+.badge-dot {
+  position: absolute; top: 6px; right: 6px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--blush-400);
+}
+
+/* City Selector */
+.city-select { display: none; }
+@media (min-width: 768px) {
+  .city-select {
+    display: flex; align-items: center; gap: 0.25rem;
+    font: 500 0.8125rem var(--font-ui); color: var(--burgundy-600);
+    padding: 0.5rem 0.75rem; border-radius: var(--radius-md);
+    background: var(--cream-200); cursor: pointer;
+  }
+}
+
+/* ===== NAV DRAWER (Mobile) ===== */
+.nav-overlay {
+  position: fixed; inset: 0; background: rgba(26,20,16,0.3);
+  z-index: 60; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.nav-overlay.open { opacity: 1; pointer-events: auto; }
+.nav-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; width: min(320px, 85vw);
+  background: var(--cream-100); z-index: 70;
+  transform: translateX(-100%); transition: transform 0.3s ease-out;
+  overflow-y: auto; padding: 1.5rem;
+}
+.nav-drawer.open { transform: translateX(0); }
+.nav-drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.nav-section-title { font: 500 0.75rem/1.4 var(--font-ui); letter-spacing: 0.05em; text-transform: uppercase; color: var(--sage-600); margin: 1.5rem 0 0.75rem; }
+.nav-occasion-list { display: flex; flex-direction: column; gap: 0.25rem; }
+.nav-occasion-item { padding: 0.75rem 1rem; border-radius: var(--radius-md); font: 500 0.9375rem var(--font-ui); color: var(--warm-800); transition: background 0.15s; }
+.nav-occasion-item:hover { background: var(--cream-200); }
+.nav-occasion-icon { display: inline-block; width: 24px; text-align: center; margin-right: 0.75rem; }
+
+/* ===== HERO ===== */
+.hero { padding: 2rem 0 3rem; }
+.hero-grid {
+  display: grid; gap: 2rem; align-items: center;
+}
+@media (min-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .hero-content { padding-right: 2rem; }
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 1rem; border-radius: 9999px;
+  background: var(--blush-200); color: var(--burgundy-600);
+  font: 500 0.8125rem var(--font-ui); margin-bottom: 1.5rem;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blush-400); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero-title { margin-bottom: 1rem; color: var(--warm-900); }
+.hero-subtitle { font: 400 clamp(1rem, 2vw, 1.25rem)/1.5 var(--font-ui); color: var(--warm-800); margin-bottom: 2rem; max-width: 480px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero-image {
+  border-radius: var(--radius-xl); overflow: hidden;
+  aspect-ratio: 4/5; background: linear-gradient(135deg, var(--sage-300) 0%, var(--blush-200) 50%, var(--cream-200) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.hero-image-placeholder {
+  font: italic 400 1.25rem var(--font-heading); color: var(--burgundy-600);
+  opacity: 0.6; text-align: center; padding: 2rem;
+}
+.hero-image-badge {
+  position: absolute; bottom: 1rem; right: 1rem;
+  padding: 0.5rem 1rem; border-radius: 9999px;
+  background: rgba(255,248,240,0.9); backdrop-filter: blur(8px);
+  font: 500 0.75rem var(--font-ui); color: var(--burgundy-600);
+  display: flex; align-items: center; gap: 0.375rem;
+}
+
+/* ===== OCCASION CAROUSEL ===== */
+.occasion-section { overflow: hidden; }
+.occasion-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; }
+.occasion-scroll {
+  display: flex; gap: 0.75rem; overflow-x: auto;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem; scrollbar-width: none;
+}
+.occasion-scroll::-webkit-scrollbar { display: none; }
+.occasion-card {
+  flex: 0 0 70vw; max-width: 200px; scroll-snap-align: start;
+  border-radius: var(--radius-xl); padding: 1.5rem;
+  background: var(--cream-100); border: 1px solid var(--cream-300);
+  text-align: center; transition: all 0.3s;
+  cursor: pointer;
+}
+.occasion-card:hover { border-color: var(--sage-400); box-shadow: var(--shadow-card); }
+.occasion-emoji { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+.occasion-name { font: 500 0.9375rem/1.3 var(--font-heading); color: var(--warm-900); }
+.occasion-count { font: 400 0.75rem var(--font-ui); color: var(--sage-600); margin-top: 0.25rem; }
+
+/* ===== FEATURED PRODUCTS ===== */
+.products-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+}
+@media (min-width: 640px) { .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+@media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+.product-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--cream-100); box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s, transform 0.3s; cursor: pointer;
+}
+.product-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+.product-image {
+  aspect-ratio: 4/5; overflow: hidden; position: relative;
+  background: linear-gradient(135deg, var(--sage-300) 0%, var(--blush-200) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.product-image-dot {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,248,240,0.85); display: flex; align-items: center; justify-content: center;
+}
+.product-image-dot svg { width: 18px; height: 18px; color: var(--blush-400); }
+.product-badge {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  padding: 0.25rem 0.625rem; border-radius: 9999px;
+  font: 500 0.6875rem var(--font-ui); letter-spacing: 0.02em;
+}
+.product-badge.new { background: var(--sage-400); color: var(--warm-900); }
+.product-badge.sale { background: var(--blush-400); color: var(--warm-900); }
+.product-info { padding: 1rem; }
+.product-occasion { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.25rem; }
+.product-name { font: 500 clamp(0.9375rem, 1.5vw, 1.1rem)/1.3 var(--font-heading); color: var(--warm-900); margin-bottom: 0.25rem; }
+.product-price { font: 700 1.0625rem var(--font-ui); color: var(--burgundy-600); }
+.product-from { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); }
+.product-tiers { display: flex; gap: 0.375rem; margin-top: 0.5rem; flex-wrap: wrap; }
+.tier-chip {
+  padding: 0.1875rem 0.5rem; border-radius: 9999px;
+  font: 400 0.6875rem var(--font-ui);
+  background: var(--sage-300); color: var(--sage-700); opacity: 0.5;
+}
+
+/* ===== TRUST BAR ===== */
+.trust-bar {
+  background: var(--burgundy-600); color: var(--cream-100);
+  padding: 2rem 0;
+}
+.trust-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+@media (min-width: 768px) { .trust-grid { grid-template-columns: repeat(4, 1fr); } }
+.trust-item { display: flex; align-items: flex-start; gap: 0.75rem; }
+.trust-icon {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,248,240,0.15); display: flex; align-items: center; justify-content: center;
+}
+.trust-icon svg { width: 20px; height: 20px; color: var(--cream-100); }
+.trust-title { font: 600 0.875rem var(--font-ui); margin-bottom: 0.125rem; }
+.trust-desc { font: 400 0.75rem var(--font-ui); opacity: 0.75; }
+
+/* ===== SECTION HEADERS ===== */
+.section-header { text-align: center; margin-bottom: 2.5rem; }
+@media (min-width: 768px) { .section-header { margin-bottom: 3rem; } }
+.section-title { color: var(--warm-900); margin-bottom: 0.5rem; }
+.section-subtitle { font: 400 1rem/1.5 var(--font-ui); color: var(--sage-600); max-width: 480px; margin: 0 auto; }
+.section-cta { text-align: center; margin-top: 2.5rem; }
+
+/* ===== PROMO BANNER ===== */
+.promo-banner {
+  background: linear-gradient(135deg, var(--blush-200) 0%, var(--sage-300) 100%);
+  border-radius: var(--radius-xl); padding: 2rem; text-align: center;
+}
+@media (min-width: 768px) { .promo-banner { display: grid; grid-template-columns: 1fr auto; align-items: center; text-align: left; gap: 2rem; padding: 2.5rem 3rem; } }
+.promo-text { font: 600 clamp(1.25rem, 2vw, 1.75rem)/1.2 var(--font-heading); color: var(--burgundy-600); margin-bottom: 0.5rem; }
+.promo-sub { font: 400 0.9375rem var(--font-ui); color: var(--warm-800); }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background: var(--burgundy-700); color: var(--cream-200);
+  padding: 3rem 0 1.5rem; margin-top: 4rem;
+}
+@media (min-width: 768px) { .site-footer { padding: 4rem 0 2rem; } }
+.footer-grid {
+  display: grid; grid-template-columns: 1fr; gap: 2rem;
+}
+@media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1.5fr; } }
+.footer-brand { font: 700 1.5rem var(--font-heading); margin-bottom: 0.75rem; }
+.footer-desc { font: 400 0.8125rem var(--font-ui); opacity: 0.7; line-height: 1.6; max-width: 280px; }
+.footer-heading { font: 600 0.8125rem var(--font-ui); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--cream-100); }
+.footer-links { display: flex; flex-direction: column; gap: 0.625rem; }
+.footer-link { font: 400 0.8125rem var(--font-ui); opacity: 0.7; transition: opacity 0.2s; }
+.footer-link:hover { opacity: 1; }
+.footer-bottom { border-top: 1px solid rgba(255,248,240,0.1); margin-top: 2.5rem; padding-top: 1.5rem; text-align: center; font: 400 0.75rem var(--font-ui); opacity: 0.5; }
+
+/* ===== MOBILE BOTTOM NAV ===== */
+.mobile-nav {
+  display: flex;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,248,240,0.95); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--cream-300);
+  padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
+  z-index: 50; justify-content: space-around;
+}
+@media (min-width: 768px) { .mobile-nav { display: none; } }
+.mobile-nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+  font: 400 0.625rem var(--font-ui); color: var(--sage-600); padding: 0.25rem;
+}
+.mobile-nav-item.active { color: var(--burgundy-600); }
+.mobile-nav-item svg { width: 22px; height: 22px; }
+body { padding-bottom: 72px; }
+@media (min-width: 768px) { body { padding-bottom: 0; } }
+
+/* ===== UTILITY ===== */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <button class="icon-btn" id="menuToggle" aria-label="Mở menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="/" class="header-logo">Bloom Wedding</a>
+    <div class="city-select">📍 Hồ Chí Minh <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Tìm kiếm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Yêu thích">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Giỏ hàng" id="cartToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV DRAWER (Mobile) ===== -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+  <div class="nav-drawer-header">
+    <span class="font-heading" style="font-size:1.25rem;font-weight:700;color:var(--burgundy-600)">Menu</span>
+    <button class="icon-btn" id="navClose" aria-label="Đóng menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="city-select" style="margin-bottom:1rem;display:flex;">
+    📍 Hồ Chí Minh
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <div class="nav-section-title">Dịp Tặng Hoa</div>
+  <div class="nav-occasion-list">
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">💝</span>Sinh Nhật</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">💒</span>Kỷ Niệm</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">❤️</span>Ngày Valentine</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">👩‍👧</span>Ngày Của Mẹ</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">🌹</span>Ngày 8/3</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">💐</span>Ngày 20/10</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">🎓</span>Tốt Nghiệp</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">🎂</span>Khai Trương</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">🙏</span>Chia Buồn</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">✨</span>Tết Nguyên Đán</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">🎄</span>Giáng Sinh</a>
+    <a href="#" class="nav-occasion-item"><span class="nav-occasion-icon">💍</span>Cầu Hôn</a>
+  </div>
+  <div class="nav-section-title">Loại Hoa</div>
+  <div class="nav-occasion-list">
+    <a href="#" class="nav-occasion-item">Bó Hoa</a>
+    <a href="#" class="nav-occasion-item">Giỏ Hoa</a>
+    <a href="#" class="nav-occasion-item">Hộp Hoa</a>
+    <a href="#" class="nav-occasion-item">Lẵng Hoa</a>
+    <a href="#" class="nav-occasion-item">Hoa Hồng</a>
+    <a href="#" class="nav-occasion-item">Hoa Hướng Dương</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span> Giao hoa trong 90 phút
+        </div>
+        <h1 class="text-display hero-title">
+          Gửi yêu thương,<br>trọn vẹn từng<br>cánh hoa
+        </h1>
+        <p class="hero-subtitle">
+          Hoa tươi cao cấp giao tận nơi tại TP.HCM & Hà Nội. Cam kết hình ảnh giống đến 90%, kèm thiệp miễn phí.
+        </p>
+        <div class="hero-actions">
+          <a href="/category.html" class="btn-primary">Xem bộ sưu tập →</a>
+          <a href="#" class="btn-outline">Giao ngay hôm nay</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="hero-image-placeholder">
+          ✦ Hình ảnh bó hoa<br>cao cấp tại Bloom Wedding ✦
+        </div>
+        <div class="hero-image-badge">
+          ⭐ 4.9 (2,000+ đánh giá)
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OCCASION CAROUSEL ===== -->
+<section class="occasion-section">
+  <div class="container">
+    <div class="occasion-header">
+      <h2 class="text-h2 font-heading" style="color:var(--warm-900)">Chọn theo dịp</h2>
+      <span class="text-body-sm" style="color:var(--sage-600)">← Vuốt để xem thêm →</span>
+    </div>
+  </div>
+  <div style="padding-left:1rem;">
+    <div class="occasion-scroll">
+      <div class="occasion-card"><span class="occasion-emoji">🎂</span><div class="occasion-name">Sinh Nhật</div><div class="occasion-count">48 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">💒</span><div class="occasion-name">Kỷ Niệm</div><div class="occasion-count">32 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">❤️</span><div class="occasion-name">Valentine</div><div class="occasion-count">56 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">👩‍👧</span><div class="occasion-name">Ngày Của Mẹ</div><div class="occasion-count">24 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">🌹</span><div class="occasion-name">Ngày 8/3</div><div class="occasion-count">60 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">💐</span><div class="occasion-name">Ngày 20/10</div><div class="occasion-count">55 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">🎓</span><div class="occasion-name">Tốt Nghiệp</div><div class="occasion-count">18 mẫu</div></div>
+      <div class="occasion-card"><span class="occasion-emoji">✨</span><div class="occasion-name">Tết</div><div class="occasion-count">30 mẫu</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="text-h2 section-title">Bó hoa nổi bật</h2>
+      <p class="section-subtitle">Tuyển chọn những mẫu hoa được yêu thích nhất tuần này</p>
+    </div>
+    <div class="products-grid">
+      <!-- Product cards -->
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hoa hồng</span>
+          <span class="product-badge new">Mới</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Sinh Nhật</p>
+          <h3 class="product-name">Bó Hồng Đỏ Classic</h3>
+          <p class="product-from">Từ <span class="product-price">450.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hoa mix</span>
+          <span class="product-badge sale">-20%</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Kỷ Niệm</p>
+          <h3 class="product-name">Tình Yêu Vĩnh Cửu</h3>
+          <p class="product-from">Từ <span class="product-price">680.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Giỏ hoa</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Ngày 8/3</p>
+          <h3 class="product-name">Nắng Ban Công</h3>
+          <p class="product-from">Từ <span class="product-price">550.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Hộp hoa</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Valentine</p>
+          <h3 class="product-name">Hộp Hồng Sơn Son</h3>
+          <p class="product-from">Từ <span class="product-price">890.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Lẵng hoa</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Khai Trương</p>
+          <h3 class="product-name">Phúc Lộc Thọ</h3>
+          <p class="product-from">Từ <span class="product-price">1.200.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hoa</span>
+          <span class="product-badge new">Best Seller</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">20/10</p>
+          <h3 class="product-name">Nét Dịu Dàng</h3>
+          <p class="product-from">Từ <span class="product-price">520.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Bó hoa</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Chia Buồn</p>
+          <h3 class="product-name">Thành Kính Phân Ưu</h3>
+          <p class="product-from">Từ <span class="product-price">650.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+          </div>
+        </div>
+      </a>
+      <a href="/product-detail.html" class="product-card">
+        <div class="product-image">
+          <span style="font:italic 400 1rem var(--font-heading);color:var(--burgundy-600);opacity:0.5">Hoa hướng dương</span>
+          <div class="product-image-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        </div>
+        <div class="product-info">
+          <p class="product-occasion">Tốt Nghiệp</p>
+          <h3 class="product-name">Mặt Trời Nhỏ</h3>
+          <p class="product-from">Từ <span class="product-price">380.000₫</span></p>
+          <div class="product-tiers">
+            <span class="tier-chip">Standard</span>
+            <span class="tier-chip">Premium</span>
+            <span class="tier-chip">Deluxe</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="section-cta">
+      <a href="/category.html" class="btn-outline">Xem tất cả bó hoa →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROMO BANNER ===== -->
+<section class="section">
+  <div class="container">
+    <div class="promo-banner">
+      <div>
+        <p class="promo-text">🌸 Ưu đãi mùa hè — Giảm 15% đơn đầu tiên</p>
+        <p class="promo-sub">Nhập mã <strong>BLOOM15</strong> khi thanh toán. Áp dụng đến 31/08/2026.</p>
+      </div>
+      <a href="/category.html" class="btn-primary" style="margin-top:1rem;">Đặt hoa ngay</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="text-h2 section-title">Đặt hoa dễ như nhắn tin</h2>
+      <p class="section-subtitle">Chỉ 3 bước, hoa đến tay người nhận trong 90 phút</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:720px;margin:0 auto;">
+      <div style="text-align:center;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--sage-300);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;">1</div>
+        <h4 style="font:500 1rem var(--font-heading);color:var(--warm-900);margin-bottom:0.25rem;">Chọn hoa</h4>
+        <p style="font:400 0.8125rem var(--font-ui);color:var(--sage-600);">Chọn mẫu, dịp tặng và gói phù hợp</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--sage-300);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;">2</div>
+        <h4 style="font:500 1rem var(--font-heading);color:var(--warm-900);margin-bottom:0.25rem;">Ghi lời nhắn</h4>
+        <p style="font:400 0.8125rem var(--font-ui);color:var(--sage-600);">Thêm thiệp miễn phí với lời nhắn riêng</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--sage-300);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;">3</div>
+        <h4 style="font:500 1rem var(--font-heading);color:var(--warm-900);margin-bottom:0.25rem;">Giao ngay</h4>
+        <p style="font:400 0.8125rem var(--font-ui);color:var(--sage-600);">Giao trong 90 phút, xác nhận bằng ảnh</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div>
+          <div class="trust-title">Giao trong 90 phút</div>
+          <div class="trust-desc">Giao hàng siêu tốc nội thành</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div>
+          <div class="trust-title">Ảnh giống 90%</div>
+          <div class="trust-desc">Hoàn tiền nếu không đúng ảnh</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div>
+          <div class="trust-title">Thiệp miễn phí</div>
+          <div class="trust-desc">Viết tay theo yêu cầu</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div>
+          <div class="trust-title">COD Thanh Toán</div>
+          <div class="trust-desc">Nhận hoa rồi trả tiền</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Bloom Wedding</div>
+        <p class="footer-desc">Cửa hàng hoa tươi cao cấp — Giao hoa tận nơi tại TP.HCM & Hà Nội trong 90 phút.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Dịch vụ</div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Giao hoa hôm nay</a>
+          <a href="#" class="footer-link">Hoa sinh nhật</a>
+          <a href="#" class="footer-link">Hoa khai trương</a>
+          <a href="#" class="footer-link">Hoa cưới</a>
+          <a href="#" class="footer-link">Đặt hoa theo yêu cầu</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Hỗ trợ</div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Chính sách đổi trả</a>
+          <a href="#" class="footer-link">Câu hỏi thường gặp</a>
+          <a href="#" class="footer-link">Liên hệ</a>
+          <a href="#" class="footer-link">Hướng dẫn đặt hoa</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Liên hệ</div>
+        <div class="footer-links">
+          <span class="footer-link">📞 0909.123.456</span>
+          <span class="footer-link">📧 hello@bloomwedding.vn</span>
+          <span class="footer-link">📍 123 Nguyễn Huệ, Q1, TP.HCM</span>
+          <span class="footer-link">🕐 7:00 - 21:00 mỗi ngày</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Bloom Wedding. Tất cả quyền được bảo lưu.
+    </div>
+  </div>
+</footer>
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<nav class="mobile-nav">
+  <a href="/" class="mobile-nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Trang chủ
+  </a>
+  <a href="/category.html" class="mobile-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    Danh mục
+  </a>
+  <a href="#" class="mobile-nav-item" id="cartToggle">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Giỏ hàng
+  </a>
+  <a href="#" class="mobile-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Tài khoản
+  </a>
+</nav>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Mobile nav drawer toggle
+const menuToggle = document.getElementById('menuToggle');
+const navOverlay = document.getElementById('navOverlay');
+const navDrawer = document.getElementById('navDrawer');
+const navClose = document.getElementById('navClose');
+
+function openNav() {
+  navDrawer.classList.add('open');
+  navOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeNav() {
+  navDrawer.classList.remove('open');
+  navOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+menuToggle.addEventListener('click', openNav);
+navOverlay.addEventListener('click', closeNav);
+navClose.addEventListener('click', closeNav);
+
+// Cart navigation
+document.querySelectorAll('#cartToggle').forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/cart.html';
+  });
+});
+</script>
+
+</body>
+</html>

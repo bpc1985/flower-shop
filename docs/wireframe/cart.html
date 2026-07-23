@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giỏ Hàng — Bloom Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream-100: #FFF8F0; --cream-200: #FFF2E0; --cream-300: #FFE8CC;
+  --sage-300: #C5D1B8; --sage-400: #B1C1A0; --sage-500: #9CAF88; --sage-600: #7D9468; --sage-700: #637A4F;
+  --blush-200: #F5D9DC; --blush-400: #E8B4B8;
+  --burgundy-600: #6B2737; --burgundy-700: #5A1F2D;
+  --warm-800: #2D2420; --warm-900: #1A1410;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, sans-serif;
+  --shadow-card: 0 2px 12px rgba(107, 39, 55, 0.06);
+  --shadow-elevated: 0 8px 32px rgba(107, 39, 55, 0.08);
+  --radius-lg: 16px; --radius-md: 14px; --radius-xl: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-ui); background: var(--cream-100);
+  color: var(--warm-800); line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
+.font-heading { font-family: var(--font-heading); }
+.container { max-width: 900px; margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 768px) { .container { padding: 0 1.5rem; } }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,248,240,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-300);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 1rem; max-width: 900px; margin: 0 auto;
+}
+@media (min-width: 768px) { .header-inner { padding: 0 1.5rem; } }
+.header-back { display: flex; align-items: center; gap: 0.5rem; font: 500 0.875rem var(--font-ui); color: var(--burgundy-600); }
+.header-logo { font: 700 1.5rem/1 var(--font-heading); color: var(--burgundy-600); letter-spacing: -0.02em; }
+
+/* Page title */
+.page-title { font: 700 clamp(1.5rem, 3vw, 2rem)/1.2 var(--font-heading); color: var(--warm-900); padding: 1.5rem 0 1rem; }
+.item-count { font: 400 0.875rem var(--font-ui); color: var(--sage-600); margin-bottom: 1.5rem; }
+
+/* Cart Items */
+.cart-items { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.cart-item {
+  display: grid; grid-template-columns: 80px 1fr auto; gap: 1rem; align-items: center;
+  background: var(--cream-100); border-radius: var(--radius-lg); padding: 1rem;
+  border: 1px solid var(--cream-300); transition: border-color 0.2s;
+}
+.cart-item:hover { border-color: var(--sage-400); }
+.cart-item-image {
+  width: 80px; height: 100px; border-radius: var(--radius-md); overflow: hidden;
+  background: linear-gradient(135deg, var(--sage-300), var(--blush-200));
+  display: flex; align-items: center; justify-content: center;
+}
+.cart-item-name { font: 600 0.9375rem/1.3 var(--font-heading); color: var(--warm-900); margin-bottom: 0.25rem; }
+.cart-item-tier {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  padding: 0.1875rem 0.5rem; border-radius: 9999px;
+  background: var(--sage-300); font: 400 0.6875rem var(--font-ui); color: var(--sage-700);
+  margin-bottom: 0.5rem;
+}
+.cart-item-price { font: 600 1rem var(--font-ui); color: var(--burgundy-600); }
+.cart-item-actions { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+.qty-selector { display: flex; align-items: center; gap: 0.5rem; }
+.qty-btn {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--cream-300);
+  display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--warm-800);
+  transition: all 0.15s;
+}
+.qty-btn:hover { border-color: var(--sage-500); }
+.qty-value { font: 500 0.875rem var(--font-ui); min-width: 20px; text-align: center; }
+.remove-btn {
+  font: 400 0.75rem var(--font-ui); color: var(--blush-400);
+  display: flex; align-items: center; gap: 0.25rem; transition: color 0.15s;
+}
+.remove-btn:hover { color: #c7787e; }
+.remove-btn svg { width: 14px; height: 14px; }
+
+/* Photo Confirmation Checkbox */
+.photo-check {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 1rem; background: var(--cream-200); border-radius: var(--radius-lg); margin-bottom: 1.5rem;
+  cursor: pointer; transition: background 0.2s;
+}
+.photo-check:hover { background: var(--cream-300); }
+.photo-check input[type="checkbox"] {
+  margin-top: 0.25rem; width: 18px; height: 18px; accent-color: var(--sage-500); flex-shrink: 0;
+}
+.photo-check-content { flex: 1; }
+.photo-check-title { font: 500 0.875rem var(--font-ui); color: var(--warm-900); margin-bottom: 0.125rem; }
+.photo-check-desc { font: 400 0.75rem var(--font-ui); color: var(--sage-600); line-height: 1.5; }
+
+/* Free Card Badge */
+.card-badge {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1rem; background: var(--cream-200); border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem; font: 400 0.875rem var(--font-ui); color: var(--sage-700);
+}
+.card-badge svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* Order Summary */
+.summary-section { border-top: 1px solid var(--cream-300); padding-top: 1.5rem; }
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.5rem 0; font: 400 0.9375rem var(--font-ui);
+}
+.summary-row.total {
+  font: 700 1.125rem var(--font-ui); color: var(--burgundy-600);
+  border-top: 1px solid var(--cream-300); padding-top: 0.75rem; margin-top: 0.5rem;
+}
+.summary-free { font: 400 0.8125rem var(--font-ui); color: var(--sage-500); }
+
+/* COD Badge */
+.cod-badge {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  padding: 0.25rem 0.75rem; border-radius: 9999px;
+  background: var(--sage-400); color: var(--warm-900);
+  font: 500 0.75rem var(--font-ui);
+}
+
+/* Checkout Button */
+.checkout-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  width: 100%; padding: 1rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 600 1rem var(--font-ui); transition: background 0.2s; min-height: 52px;
+  margin-top: 1.5rem;
+}
+.checkout-btn:hover { background: var(--sage-400); }
+.continue-link {
+  display: block; text-align: center; margin-top: 1rem;
+  font: 500 0.875rem var(--font-ui); color: var(--sage-600); transition: color 0.15s;
+}
+.continue-link:hover { color: var(--burgundy-600); }
+
+/* Trust below CTA */
+.trust-below { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.25rem; }
+.trust-below-item { display: flex; align-items: center; gap: 0.375rem; font: 400 0.75rem var(--font-ui); color: var(--sage-600); }
+.trust-below-item svg { width: 14px; height: 14px; color: var(--sage-500); }
+
+/* ===== EMPTY STATE ===== */
+.empty-state { text-align: center; padding: 4rem 1rem; display: none; }
+.empty-icon { font-size: 4rem; margin-bottom: 1.5rem; display: block; }
+.empty-title { font: 600 1.5rem var(--font-heading); color: var(--warm-900); margin-bottom: 0.5rem; }
+.empty-desc { font: 400 0.9375rem var(--font-ui); color: var(--sage-600); margin-bottom: 1.5rem; }
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 500 0.875rem/1 var(--font-ui); transition: background 0.2s; min-height: 44px;
+}
+.btn-primary:hover { background: var(--sage-400); }
+
+/* Mobile bottom spacing */
+body { padding-bottom: 28px; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/product-detail.html" class="header-back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Tiếp tục mua sắm
+    </a>
+    <a href="/" class="header-logo">Bloom</a>
+  </div>
+</header>
+
+<!-- ===== CART CONTENT ===== -->
+<div class="container">
+  <h1 class="page-title">Giỏ hàng của bạn</h1>
+  <p class="item-count">2 sản phẩm</p>
+
+  <!-- Cart Items -->
+  <div class="cart-items">
+    <!-- Item 1 -->
+    <div class="cart-item">
+      <div class="cart-item-image">
+        <span style="font:italic 400 0.625rem var(--font-heading);color:var(--burgundy-600);opacity:0.5;text-align:center;">Bó hồng đỏ</span>
+      </div>
+      <div>
+        <div class="cart-item-name">Bó Hồng Đỏ Classic</div>
+        <span class="cart-item-tier">Premium · 12 bông</span>
+        <div class="cart-item-price">680.000₫</div>
+        <div class="cart-item-actions">
+          <div class="qty-selector">
+            <button class="qty-btn qty-minus">−</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn qty-plus">+</button>
+          </div>
+          <button class="remove-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="cart-item">
+      <div class="cart-item-image">
+        <span style="font:italic 400 0.625rem var(--font-heading);color:var(--burgundy-600);opacity:0.5;text-align:center;">Tulip</span>
+      </div>
+      <div>
+        <div class="cart-item-name">Tulip Hà Lan</div>
+        <span class="cart-item-tier">Standard · 8 bông</span>
+        <div class="cart-item-price">550.000₫</div>
+        <div class="cart-item-actions">
+          <div class="qty-selector">
+            <button class="qty-btn qty-minus">−</button>
+            <span class="qty-value">1</span>
+            <button class="qty-btn qty-plus">+</button>
+          </div>
+          <button class="remove-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Confirmation Checkbox -->
+  <label class="photo-check">
+    <input type="checkbox" checked id="photoConfirm">
+    <div class="photo-check-content">
+      <div class="photo-check-title">📸 Gửi ảnh xác nhận trước khi giao (miễn phí)</div>
+      <div class="photo-check-desc">Chúng tôi sẽ chụp ảnh bó hoa và gửi qua Zalo/SMS cho bạn duyệt. Chỉ giao khi bạn đồng ý.</div>
+    </div>
+  </label>
+
+  <!-- Free Card Badge -->
+  <div class="card-badge">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    Thiệp viết tay miễn phí cho mỗi đơn hàng
+  </div>
+
+  <!-- Order Summary -->
+  <div class="summary-section">
+    <div class="summary-row">
+      <span>Tạm tính (2 sản phẩm)</span>
+      <span>1.230.000₫</span>
+    </div>
+    <div class="summary-row">
+      <span>Phí giao hàng</span>
+      <span class="summary-free">Miễn phí</span>
+    </div>
+    <div class="summary-row total">
+      <span>Tổng cộng</span>
+      <span>
+        <span class="cod-badge" style="margin-right:0.5rem;">COD</span>
+        1.230.000₫
+      </span>
+    </div>
+  </div>
+
+  <!-- Checkout CTA -->
+  <a href="/checkout.html" class="checkout-btn">
+    Thanh toán — 1.230.000₫
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+  <a href="/category.html" class="continue-link">← Tiếp tục mua sắm</a>
+
+  <div class="trust-below">
+    <span class="trust-below-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Thanh toán an toàn
+    </span>
+    <span class="trust-below-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Thiệp miễn phí
+    </span>
+    <span class="trust-below-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      COD nhận hàng trả tiền
+    </span>
+  </div>
+</div>
+
+<!-- ===== EMPTY STATE (hidden by default) ===== -->
+<div class="empty-state" id="emptyState">
+  <span class="empty-icon">🛒</span>
+  <div class="empty-title">Giỏ hàng trống</div>
+  <p class="empty-desc">Bạn chưa có sản phẩm nào trong giỏ. Hãy khám phá bộ sưu tập của chúng tôi!</p>
+  <a href="/category.html" class="btn-primary">Khám phá hoa →</a>
+</div>
+
+<script>
+// Quantity controls
+document.querySelectorAll('.qty-minus').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const val = this.nextElementSibling;
+    let qty = parseInt(val.textContent);
+    if (qty > 1) { qty--; val.textContent = qty; updateTotals(); }
+  });
+});
+document.querySelectorAll('.qty-plus').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const val = this.previousElementSibling;
+    let qty = parseInt(val.textContent);
+    qty++; val.textContent = qty; updateTotals();
+  });
+});
+
+// Remove buttons
+document.querySelectorAll('.remove-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.closest('.cart-item').remove();
+    updateTotals();
+    // Show empty state if no items
+    const remaining = document.querySelectorAll('.cart-item');
+    if (remaining.length === 0) {
+      document.querySelector('.cart-items').style.display = 'none';
+      document.querySelector('.photo-check').style.display = 'none';
+      document.querySelector('.card-badge').style.display = 'none';
+      document.querySelector('.summary-section').style.display = 'none';
+      document.querySelector('.checkout-btn').style.display = 'none';
+      document.querySelector('.continue-link').style.display = 'none';
+      document.querySelector('.trust-below').style.display = 'none';
+      document.querySelector('.item-count').style.display = 'none';
+      document.getElementById('emptyState').style.display = 'block';
+    }
+  });
+});
+
+// Photo confirmation toggle
+document.getElementById('photoConfirm').addEventListener('change', function() {
+  // In real app: persists to cart state
+});
+
+function updateTotals() {
+  // ponytail: simple recalculation for wireframe demo
+  let total = 0;
+  document.querySelectorAll('.cart-item').forEach(item => {
+    const priceText = item.querySelector('.cart-item-price').textContent;
+    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+    const qty = parseInt(item.querySelector('.qty-value').textContent);
+    total += price * qty;
+  });
+  const count = document.querySelectorAll('.cart-item').length;
+  document.querySelector('.item-count').textContent = count + ' sản phẩm';
+  document.querySelector('.summary-row:first-of-type span:last-child').textContent = total.toLocaleString('vi-VN') + '₫';
+  document.querySelector('.summary-row.total span:last-child').innerHTML = '<span class="cod-badge" style="margin-right:0.5rem;">COD</span>' + total.toLocaleString('vi-VN') + '₫';
+  document.querySelector('.checkout-btn').innerHTML = 'Thanh toán — ' + total.toLocaleString('vi-VN') + '₫ <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+}
+</script>
+
+</body>
+</html>

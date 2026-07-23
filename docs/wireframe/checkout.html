@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh Toán — Bloom Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream-100: #FFF8F0; --cream-200: #FFF2E0; --cream-300: #FFE8CC;
+  --sage-300: #C5D1B8; --sage-400: #B1C1A0; --sage-500: #9CAF88; --sage-600: #7D9468; --sage-700: #637A4F;
+  --blush-200: #F5D9DC; --blush-400: #E8B4B8;
+  --burgundy-600: #6B2737; --burgundy-700: #5A1F2D;
+  --warm-800: #2D2420; --warm-900: #1A1410;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-ui: 'DM Sans', -apple-system, sans-serif;
+  --shadow-card: 0 2px 12px rgba(107, 39, 55, 0.06);
+  --shadow-elevated: 0 8px 32px rgba(107, 39, 55, 0.08);
+  --radius-lg: 16px; --radius-md: 14px; --radius-xl: 20px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-ui); background: var(--cream-100);
+  color: var(--warm-800); line-height: 1.6; -webkit-font-smoothing: antialiased;
+  padding-bottom: 2rem;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font: inherit; border: none; background: none; }
+.font-heading { font-family: var(--font-heading); }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 768px) { .container { padding: 0 1.5rem; } }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,248,240,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-300);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 1rem; max-width: 1100px; margin: 0 auto;
+}
+@media (min-width: 768px) { .header-inner { padding: 0 1.5rem; } }
+.header-back { display: flex; align-items: center; gap: 0.5rem; font: 500 0.875rem var(--font-ui); color: var(--burgundy-600); }
+.header-logo { font: 700 1.5rem/1 var(--font-heading); color: var(--burgundy-600); letter-spacing: -0.02em; }
+
+/* Page Title */
+.page-title { font: 700 clamp(1.5rem, 3vw, 2rem)/1.2 var(--font-heading); color: var(--warm-900); padding: 1.5rem 0 1rem; }
+
+/* Checkout Layout */
+.checkout-grid { display: grid; gap: 1.5rem; }
+@media (min-width: 1024px) {
+  .checkout-grid { grid-template-columns: 1fr 380px; gap: 2rem; align-items: start; }
+}
+
+/* ===== FORM SECTIONS ===== */
+.form-section {
+  background: var(--cream-100); border-radius: var(--radius-xl);
+  border: 1px solid var(--cream-300); padding: 1.25rem; margin-bottom: 1rem;
+}
+.section-header-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--sage-300); font-size: 1.125rem; margin-bottom: 0.75rem; }
+.section-title-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; }
+.section-title { font: 600 1.0625rem var(--font-heading); color: var(--warm-900); }
+.section-hint { font: 400 0.75rem var(--font-ui); color: var(--sage-600); }
+
+/* Form Fields */
+.form-grid { display: grid; gap: 0.875rem; }
+.form-grid-2 { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .form-grid-2 { grid-template-columns: 1fr 1fr; } }
+.form-grid-3 { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .form-grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 0.375rem; }
+.form-label {
+  font: 500 0.8125rem var(--font-ui); color: var(--warm-800);
+  display: flex; align-items: center; gap: 0.25rem;
+}
+.form-label .required { color: var(--blush-400); }
+.form-input {
+  padding: 0.75rem 1rem; border-radius: var(--radius-md);
+  border: 1px solid var(--cream-300); background: var(--cream-100);
+  font: 400 0.9375rem var(--font-ui); color: var(--warm-900);
+  transition: border-color 0.2s; width: 100%;
+}
+.form-input:focus { outline: none; border-color: var(--sage-500); }
+.form-input::placeholder { color: var(--sage-600); font-size: 0.875rem; }
+.form-select {
+  padding: 0.75rem 1rem; border-radius: var(--radius-md);
+  border: 1px solid var(--cream-300); background: var(--cream-100);
+  font: 400 0.9375rem var(--font-ui); color: var(--warm-900);
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B2737' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 1rem center;
+  width: 100%; cursor: pointer;
+}
+.form-select:focus { outline: none; border-color: var(--sage-500); }
+.form-textarea {
+  padding: 0.75rem 1rem; border-radius: var(--radius-md);
+  border: 1px solid var(--cream-300); background: var(--cream-100);
+  font: 400 0.9375rem var(--font-ui); color: var(--warm-900);
+  resize: vertical; min-height: 100px; width: 100%;
+  transition: border-color 0.2s;
+}
+.form-textarea:focus { outline: none; border-color: var(--sage-500); }
+.form-checkbox {
+  display: flex; align-items: center; gap: 0.5rem;
+  font: 400 0.8125rem var(--font-ui); color: var(--warm-800); cursor: pointer;
+}
+.form-checkbox input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--sage-500); }
+
+/* Section Divider */
+.section-divider { height: 1px; background: var(--cream-300); margin: 0.5rem 0; }
+
+/* ===== RECIPIENT CARD (visually distinct) ===== */
+.recipient-card {
+  background: var(--cream-200); border-radius: var(--radius-xl);
+  border: 2px dashed var(--sage-400); padding: 1.25rem; margin-bottom: 1rem;
+}
+.recipient-card .section-title { color: var(--burgundy-600); }
+.recipient-badge {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  padding: 0.25rem 0.625rem; border-radius: 9999px;
+  background: var(--blush-200); color: var(--burgundy-600);
+  font: 500 0.6875rem var(--font-ui); margin-bottom: 0.75rem;
+}
+
+/* ===== DELIVERY CHIPS ===== */
+.delivery-section { margin-bottom: 1rem; }
+.delivery-speed-chips {
+  display: flex; gap: 0.625rem; overflow-x: auto; scrollbar-width: none;
+  margin-bottom: 1rem; flex-wrap: wrap; -webkit-overflow-scrolling: touch;
+}
+.delivery-speed-chips::-webkit-scrollbar { display: none; }
+.delivery-chip {
+  flex-shrink: 0; padding: 0.625rem 1rem; border-radius: 9999px;
+  font: 500 0.8125rem var(--font-ui); white-space: nowrap;
+  border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--warm-800);
+  transition: all 0.2s; cursor: pointer; display: flex; align-items: center; gap: 0.375rem;
+}
+.delivery-chip:hover { border-color: var(--sage-400); }
+.delivery-chip.selected { background: var(--sage-500); border-color: var(--sage-500); color: var(--warm-900); }
+.delivery-chip svg { width: 16px; height: 16px; }
+
+/* Time Slot Selector */
+.time-slot-label { font: 500 0.8125rem var(--font-ui); color: var(--warm-800); margin-bottom: 0.625rem; }
+.time-slot-chips {
+  display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none;
+  padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch;
+}
+.time-slot-chips::-webkit-scrollbar { display: none; }
+.time-slot-chip {
+  flex-shrink: 0; padding: 0.5rem 0.875rem; border-radius: 9999px;
+  font: 400 0.8125rem var(--font-ui); white-space: nowrap;
+  border: 1px solid var(--cream-300); background: var(--cream-100); color: var(--warm-800);
+  transition: all 0.15s; cursor: pointer;
+}
+.time-slot-chip:hover { border-color: var(--sage-400); }
+.time-slot-chip.selected { background: var(--sage-500); border-color: var(--sage-500); color: var(--warm-900); font-weight: 500; }
+.time-slot-chip.full { opacity: 0.4; pointer-events: none; text-decoration: line-through; }
+
+/* ===== PHOTO CONFIRMATION ===== */
+.photo-confirm {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 1rem; background: var(--cream-200); border-radius: var(--radius-lg);
+  cursor: pointer; transition: background 0.2s; margin-bottom: 1rem;
+}
+.photo-confirm:hover { background: var(--cream-300); }
+.photo-confirm input[type="checkbox"] {
+  margin-top: 0.25rem; width: 18px; height: 18px; accent-color: var(--sage-500); flex-shrink: 0;
+}
+.photo-confirm-content { flex: 1; }
+.photo-confirm-title { font: 500 0.875rem var(--font-ui); color: var(--warm-900); margin-bottom: 0.1875rem; }
+.photo-confirm-desc { font: 400 0.75rem var(--font-ui); color: var(--sage-600); line-height: 1.5; }
+
+/* ===== PAYMENT METHODS ===== */
+.payment-options { display: flex; flex-direction: column; gap: 0.625rem; }
+.payment-option {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 1rem; border-radius: var(--radius-md);
+  border: 2px solid var(--cream-300); background: var(--cream-100);
+  cursor: pointer; transition: all 0.2s;
+}
+.payment-option:hover { border-color: var(--sage-400); }
+.payment-option.selected { border-color: var(--burgundy-600); background: var(--cream-200); }
+.payment-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--cream-300); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.payment-option.selected .payment-radio { border-color: var(--burgundy-600); }
+.payment-radio-inner { width: 10px; height: 10px; border-radius: 50%; background: var(--burgundy-600); display: none; }
+.payment-option.selected .payment-radio-inner { display: block; }
+.payment-info { flex: 1; }
+.payment-name { font: 500 0.9375rem var(--font-ui); color: var(--warm-900); }
+.payment-desc { font: 400 0.75rem var(--font-ui); color: var(--sage-600); }
+.payment-icon { font-size: 1.25rem; }
+
+/* ===== ORDER SUMMARY SIDEBAR ===== */
+.order-summary {
+  background: var(--cream-100); border-radius: var(--radius-xl);
+  border: 1px solid var(--cream-300); padding: 1.25rem; position: sticky; top: 80px;
+}
+.order-summary-title {
+  font: 600 1.0625rem var(--font-heading); color: var(--warm-900);
+  margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--cream-300);
+}
+.order-item {
+  display: flex; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 1rem;
+  border-bottom: 1px solid var(--cream-200);
+}
+.order-item-image {
+  width: 56px; height: 70px; border-radius: var(--radius-md); overflow: hidden;
+  background: linear-gradient(135deg, var(--sage-300), var(--blush-200));
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.order-item-details { flex: 1; }
+.order-item-name { font: 500 0.8125rem var(--font-heading); color: var(--warm-900); margin-bottom: 0.125rem; }
+.order-item-tier { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); }
+.order-item-qty { font: 400 0.6875rem var(--font-ui); color: var(--sage-600); }
+.order-item-price { font: 600 0.8125rem var(--font-ui); color: var(--burgundy-600); margin-top: 0.25rem; }
+.order-summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.375rem 0; font: 400 0.875rem var(--font-ui);
+}
+.order-summary-row.total {
+  font: 700 1.125rem var(--font-ui); color: var(--burgundy-600);
+  border-top: 1px solid var(--cream-300); padding-top: 0.75rem; margin-top: 0.5rem;
+}
+.order-free { color: var(--sage-500); font-weight: 500; }
+
+/* Discount Code */
+.discount-row { display: flex; gap: 0.5rem; margin: 0.75rem 0; }
+.discount-input {
+  flex: 1; padding: 0.625rem 0.75rem; border-radius: var(--radius-md);
+  border: 1px solid var(--cream-300); background: var(--cream-100);
+  font: 400 0.8125rem var(--font-ui); color: var(--warm-900);
+}
+.discount-input:focus { outline: none; border-color: var(--sage-500); }
+.discount-btn {
+  padding: 0.625rem 1rem; border-radius: var(--radius-md);
+  background: var(--cream-200); color: var(--burgundy-600);
+  font: 500 0.8125rem var(--font-ui); transition: background 0.15s; white-space: nowrap;
+}
+.discount-btn:hover { background: var(--cream-300); }
+
+/* Place Order */
+.place-order-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  width: 100%; padding: 1rem; border-radius: var(--radius-md);
+  background: var(--sage-500); color: var(--warm-900);
+  font: 600 1rem var(--font-ui); transition: background 0.2s; min-height: 52px;
+  margin-top: 1rem;
+}
+.place-order-btn:hover { background: var(--sage-400); }
+
+.place-order-trust {
+  text-align: center; margin-top: 0.75rem;
+  font: 400 0.75rem var(--font-ui); color: var(--sage-600);
+  display: flex; align-items: center; justify-content: center; gap: 0.375rem;
+}
+.place-order-trust svg { width: 14px; height: 14px; }
+
+/* Mobile: Order Summary as collapsible */
+.order-summary-toggle { display: none; }
+@media (max-width: 1023px) {
+  .order-summary-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 1rem; border-radius: var(--radius-lg);
+    background: var(--burgundy-600); color: var(--cream-100);
+    font: 500 0.9375rem var(--font-ui); margin-bottom: 1rem;
+  }
+  .order-summary-toggle svg { width: 18px; height: 18px; transition: transform 0.3s; }
+  .order-summary-toggle.open svg { transform: rotate(180deg); }
+  .order-summary.collapsible { display: none; }
+  .order-summary.collapsible.open { display: block; }
+}
+
+/* Desktop: collapse summary as well */
+@media (min-width: 1024px) {
+  .order-summary-toggle { display: none; }
+  .order-summary.collapsible { display: block !important; }
+}
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/cart.html" class="header-back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Giỏ hàng
+    </a>
+    <a href="/" class="header-logo">Bloom</a>
+    <div style="width:60px;"></div>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="page-title">Thanh toán</h1>
+
+  <!-- Mobile Order Summary Toggle -->
+  <button class="order-summary-toggle" id="orderSummaryToggle">
+    <span>🧾 Đơn hàng: 1.230.000₫</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+
+  <div class="checkout-grid">
+
+    <!-- ===== MAIN FORM COLUMN ===== -->
+    <div>
+
+      <!-- Sender Info -->
+      <div class="form-section">
+        <div class="section-header-icon">👤</div>
+        <div class="section-title-row">
+          <div class="section-title">Thông tin người gửi</div>
+          <button class="section-hint" style="color:var(--sage-600);">Đăng nhập để lưu</button>
+        </div>
+        <div class="form-grid form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Họ và tên <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Nguyễn Văn A" value="Nguyễn Minh T.">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Số điện thoại <span class="required">*</span></label>
+            <input type="tel" class="form-input" placeholder="0901 234 567" value="0909 123 456">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="email@example.com" value="minh.tuan@gmail.com">
+          </div>
+        </div>
+        <div style="margin-top:0.75rem;">
+          <label class="form-checkbox">
+            <input type="checkbox" checked>
+            Lưu thông tin cho lần sau
+          </label>
+        </div>
+      </div>
+
+      <!-- Recipient Info (visually distinct) -->
+      <div class="recipient-card">
+        <div class="recipient-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Người nhận hoa
+        </div>
+        <div class="section-title" style="margin-bottom:1rem;">Thông tin người nhận</div>
+        <div class="form-grid form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Họ và tên <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Người nhận hoa">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Số điện thoại <span class="required">*</span></label>
+            <input type="tel" class="form-input" placeholder="Số điện thoại người nhận">
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:0.875rem;">
+          <div class="form-group">
+            <label class="form-label">Địa chỉ giao hoa <span class="required">*</span></label>
+            <div class="form-grid form-grid-2" style="margin-bottom:0.5rem;">
+              <select class="form-select">
+                <option value="">Chọn thành phố</option>
+                <option value="hcm" selected>TP. Hồ Chí Minh</option>
+                <option value="hn">Hà Nội</option>
+              </select>
+              <select class="form-select">
+                <option value="">Chọn quận / huyện</option>
+                <option value="q1">Quận 1</option>
+                <option value="q3">Quận 3</option>
+                <option value="bt">Bình Thạnh</option>
+                <option value="pn">Phú Nhuận</option>
+              </select>
+            </div>
+            <input type="text" class="form-input" placeholder="Số nhà, tên đường (vd: 123 Nguyễn Huệ)">
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:0.875rem;">
+          <label class="form-label">Ghi chú giao hàng</label>
+          <input type="text" class="form-input" placeholder="VD: Công ty ABC, tầng 5, gọi trước khi giao">
+        </div>
+      </div>
+
+      <!-- Card Message -->
+      <div class="form-section">
+        <div class="section-header-icon">✍️</div>
+        <div class="section-title-row">
+          <div class="section-title">Lời nhắn trên thiệp</div>
+          <span style="font:400 0.75rem var(--font-ui);color:var(--sage-500);display:flex;align-items:center;gap:0.25rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Miễn phí
+          </span>
+        </div>
+        <div class="form-group">
+          <textarea class="form-textarea" placeholder="Viết lời nhắn của bạn... (VD: Chúc mừng sinh nhật em yêu! Mong em luôn vui vẻ và xinh đẹp. Yêu em!)"></textarea>
+          <span style="font:400 0.6875rem var(--font-ui);color:var(--sage-600);">Tối đa 200 ký tự. Thiệp sẽ được viết tay bởi đội ngũ Bloom.</span>
+        </div>
+      </div>
+
+      <!-- Delivery Time -->
+      <div class="form-section">
+        <div class="section-header-icon">🚚</div>
+        <div class="section-title" style="margin-bottom:0.75rem;">Thời gian giao hàng</div>
+
+        <!-- Speed selector -->
+        <div class="delivery-speed-chips" id="deliverySpeedChips">
+          <button class="delivery-chip selected" data-speed="asap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Giao ngay (90 phút)
+          </button>
+          <button class="delivery-chip" data-speed="today">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Hôm nay (trước 17h)
+          </button>
+          <button class="delivery-chip" data-speed="tomorrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Ngày mai
+          </button>
+          <button class="delivery-chip" data-speed="pick">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Chọn ngày
+          </button>
+        </div>
+
+        <!-- Time slot selector -->
+        <div class="time-slot-label">Chọn khung giờ giao</div>
+        <div class="time-slot-chips" id="timeSlotChips">
+          <button class="time-slot-chip full">8:00 - 10:00</button>
+          <button class="time-slot-chip">10:00 - 12:00</button>
+          <button class="time-slot-chip selected">12:00 - 14:00</button>
+          <button class="time-slot-chip">14:00 - 16:00</button>
+          <button class="time-slot-chip">16:00 - 18:00</button>
+          <button class="time-slot-chip">18:00 - 20:00</button>
+        </div>
+        <p style="font:400 0.75rem var(--font-ui);color:var(--sage-600);margin-top:0.5rem;">
+          Dự kiến giao: <strong style="color:var(--warm-800);">13:30 - 14:30 hôm nay</strong>
+        </p>
+      </div>
+
+      <!-- Photo Confirmation -->
+      <label class="photo-confirm" style="border:2px solid var(--cream-300);">
+        <input type="checkbox" checked id="photoConfirm">
+        <div class="photo-confirm-content">
+          <div class="photo-confirm-title">📸 Gửi ảnh chụp hoa cho tôi duyệt trước khi giao</div>
+          <div class="photo-confirm-desc">Bạn sẽ nhận được ảnh chụp bó hoa thực tế qua Zalo/SMS. Bloom chỉ giao hàng sau khi bạn xác nhận đồng ý. <strong>Hoàn toàn miễn phí.</strong></div>
+        </div>
+      </label>
+
+      <!-- Payment -->
+      <div class="form-section">
+        <div class="section-header-icon">💳</div>
+        <div class="section-title" style="margin-bottom:0.75rem;">Phương thức thanh toán</div>
+        <div class="payment-options" id="paymentOptions">
+          <div class="payment-option selected" data-payment="cod">
+            <div class="payment-radio"><div class="payment-radio-inner"></div></div>
+            <span class="payment-icon">💵</span>
+            <div class="payment-info">
+              <div class="payment-name">Thanh toán khi nhận hàng (COD)</div>
+              <div class="payment-desc">Nhận hoa kiểm tra rồi mới trả tiền</div>
+            </div>
+          </div>
+          <div class="payment-option" data-payment="transfer">
+            <div class="payment-radio"><div class="payment-radio-inner"></div></div>
+            <span class="payment-icon">🏦</span>
+            <div class="payment-info">
+              <div class="payment-name">Chuyển khoản ngân hàng</div>
+              <div class="payment-desc">Vietcombank, Techcombank, BIDV...</div>
+            </div>
+          </div>
+          <div class="payment-option" data-payment="momo">
+            <div class="payment-radio"><div class="payment-radio-inner"></div></div>
+            <span class="payment-icon">📱</span>
+            <div class="payment-info">
+              <div class="payment-name">Ví điện tử (MoMo / ZaloPay)</div>
+              <div class="payment-desc">Thanh toán nhanh qua ví</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== ORDER SUMMARY SIDEBAR ===== -->
+    <div>
+      <div class="order-summary collapsible" id="orderSummary">
+        <div class="order-summary-title">Đơn hàng của bạn</div>
+
+        <div class="order-item">
+          <div class="order-item-image">
+            <span style="font:italic 400 0.5rem var(--font-heading);color:var(--burgundy-600);opacity:0.5;text-align:center;">Hồng</span>
+          </div>
+          <div class="order-item-details">
+            <div class="order-item-name">Bó Hồng Đỏ Classic</div>
+            <div class="order-item-tier">Premium · 12 bông</div>
+            <div class="order-item-qty">SL: 1</div>
+            <div class="order-item-price">680.000₫</div>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="order-item-image">
+            <span style="font:italic 400 0.5rem var(--font-heading);color:var(--burgundy-600);opacity:0.5;text-align:center;">Tulip</span>
+          </div>
+          <div class="order-item-details">
+            <div class="order-item-name">Tulip Hà Lan</div>
+            <div class="order-item-tier">Standard · 8 bông</div>
+            <div class="order-item-qty">SL: 1</div>
+            <div class="order-item-price">550.000₫</div>
+          </div>
+        </div>
+
+        <!-- Discount -->
+        <div class="discount-row">
+          <input type="text" class="discount-input" placeholder="Mã giảm giá">
+          <button class="discount-btn">Áp dụng</button>
+        </div>
+
+        <div class="order-summary-row">
+          <span>Tạm tính</span>
+          <span>1.230.000₫</span>
+        </div>
+        <div class="order-summary-row">
+          <span>Phí giao hàng</span>
+          <span class="order-free">Miễn phí</span>
+        </div>
+        <div class="order-summary-row">
+          <span>Thiệp viết tay</span>
+          <span class="order-free">Miễn phí</span>
+        </div>
+        <div class="order-summary-row total">
+          <span>Tổng cộng</span>
+          <span>1.230.000₫</span>
+        </div>
+
+        <button class="place-order-btn" id="placeOrderBtn">
+          Đặt hàng — 1.230.000₫
+        </button>
+        <div class="place-order-trust">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Thanh toán an toàn · COD · Ảnh giống 90%
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Mobile order summary toggle
+const toggle = document.getElementById('orderSummaryToggle');
+const summary = document.getElementById('orderSummary');
+toggle.addEventListener('click', function() {
+  this.classList.toggle('open');
+  summary.classList.toggle('open');
+});
+
+// Delivery speed chips
+document.querySelectorAll('#deliverySpeedChips .delivery-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('#deliverySpeedChips .delivery-chip').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+// Time slot chips
+document.querySelectorAll('#timeSlotChips .time-slot-chip:not(.full)').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('#timeSlotChips .time-slot-chip').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+// Payment options
+document.querySelectorAll('#paymentOptions .payment-option').forEach(opt => {
+  opt.addEventListener('click', function() {
+    document.querySelectorAll('#paymentOptions .payment-option').forEach(o => o.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+// Place order
+document.getElementById('placeOrderBtn').addEventListener('click', function() {
+  // Validate form (ponytail: basic check for demo)
+  const requiredFields = document.querySelectorAll('input[type="text"]:not([value]), input[type="tel"]:not([value])');
+  let hasEmpty = false;
+  document.querySelectorAll('.recipient-card input[type="text"], .recipient-card input[type="tel"]').forEach(f => {
+    if (!f.value.trim()) hasEmpty = true;
+  });
+  if (hasEmpty) {
+    alert('Vui lòng điền đầy đủ thông tin người nhận.');
+    return;
+  }
+  alert('🎉 Đặt hàng thành công! Cảm ơn bạn đã tin tưởng Bloom Wedding.\n\nBạn sẽ nhận được ảnh xác nhận qua Zalo trước khi giao.');
+});
+</script>
+
+</body>
+</html>
