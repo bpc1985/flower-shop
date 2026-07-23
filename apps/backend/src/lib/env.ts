@@ -32,6 +32,12 @@ const envSchema = z.object({
   MOMO_PUBLIC_KEY: z.string().optional(),
   MOMO_RETURN_URL: z.string().optional(),
   MOMO_IPN_URL: z.string().optional(),
+  // Shipping — GHN (required for shipping)
+  GHN_TOKEN: z.string().optional(),
+  GHN_SHOP_ID: z.string().optional(),
+  GHN_FROM_DISTRICT_ID: z.string().optional(),
+  GHN_FROM_WARD_CODE: z.string().optional(),
+  GHN_ENDPOINT: z.string().url().optional(),
 });
 
 export const env = envSchema.parse(process.env);

@@ -92,6 +92,28 @@ module.exports = defineConfig({
       },
     },
     {
+      resolve: "@medusajs/medusa/fulfillment",
+      options: {
+        providers: [
+          ...(process.env.GHN_TOKEN && process.env.GHN_SHOP_ID
+            ? [
+                {
+                  resolve: "./src/modules/ghn",
+                  id: "ghn",
+                  options: {
+                    token: process.env.GHN_TOKEN,
+                    shopId: parseInt(process.env.GHN_SHOP_ID || "0") || 0,
+                    fromDistrictId: parseInt(process.env.GHN_FROM_DISTRICT_ID || "0") || 0,
+                    fromWardCode: process.env.GHN_FROM_WARD_CODE || "",
+                    endpoint: process.env.GHN_ENDPOINT || "https://dev-online-gateway.ghn.vn/shiip/public-api",
+                  },
+                },
+              ]
+            : []),
+        ],
+      },
+    },
+    {
       resolve: "@medusajs/medusa/cache-redis",
       options: { redisUrl: process.env.REDIS_URL },
     },
