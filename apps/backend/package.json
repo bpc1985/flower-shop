@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "medusa develop",
-    "build": "pnpm exec medusa build",
+    "build": "medusa build",
     "start": "medusa start",
     "seed": "medusa exec ./src/scripts/seed.ts",
     "migration:generate": "medusa db:generate",
@@ -18,6 +18,7 @@
     "@medusajs/admin-shared": "^2.17.2",
     "@medusajs/auth": "^2.17.0",
     "@medusajs/cache-redis": "^2.17.0",
+    "@medusajs/cli": "^2.17.2",
     "@medusajs/dashboard": "^2.17.2",
     "@medusajs/draft-order": "^2.17.2",
     "@medusajs/event-bus-redis": "^2.17.0",
