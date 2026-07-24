@@ -1,6 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ShoppingBag } from "lucide-react";
 import {
@@ -19,6 +21,13 @@ export function CartDrawer({ children }: { children?: React.ReactNode }) {
   const t = useTranslations("cart");
   const { data: cart, isLoading } = useCart();
   const count = useCartCount();
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  // Close cart drawer on route change (checkout, product, etc.)
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const items = (cart as any)?.items || [];
   const subtotal = (cart as any)?.subtotal || (cart as any)?.item_subtotal || 0;
@@ -27,7 +36,7 @@ export function CartDrawer({ children }: { children?: React.ReactNode }) {
   const isEmpty = !isLoading && items.length === 0;
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         {children || (
           <button className="p-2 relative hover:text-burgundy-600 transition-colors">

@@ -50,9 +50,10 @@ export function EmailLoginForm({ onSuccess }: EmailLoginFormProps) {
           id="login-email"
           type="email"
           placeholder="hello@example.com"
+          className={errors.email ? "border-red-400" : ""}
           {...register("email")}
         />
-        {errors.email && <p className="text-destructive text-sm">{errors.email.message}</p>}
+        {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="login-password">{t("password")}</Label>
@@ -60,9 +61,10 @@ export function EmailLoginForm({ onSuccess }: EmailLoginFormProps) {
           id="login-password"
           type="password"
           placeholder="••••••••"
+          className={errors.password ? "border-red-400" : ""}
           {...register("password")}
         />
-        {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
+        {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>}
       </div>
       <Button
         type="submit"

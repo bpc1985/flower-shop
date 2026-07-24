@@ -25,24 +25,45 @@ export default function CheckoutPage() {
 
   const [step, setStep] = useState<Step>("shipping");
   const [shipping, setShipping] = useState({
-    name: customer?.first_name ? `${customer.first_name} ${customer.last_name}` : "",
+    name: customer?.first_name
+      ? `${customer.first_name} ${customer.last_name}`
+      : "",
     phone: customer?.phone || "",
     province: "",
     district: "",
     ward: "",
     street: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [cardMessage, setCardMessage] = useState("");
   const [deliveryTime, setDeliveryTime] = useState("asap");
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [photoConfirm, setPhotoConfirm] = useState(false);
 
+  const validateShipping = (): boolean => {
+    const errs: Record<string, string> = {};
+    if (!shipping.name.trim()) errs.name = t("errors.nameRequired");
+    if (!shipping.phone.trim()) errs.phone = t("errors.phoneRequired");
+    else if (!/^(0|\+84)[3|5|7|8|9]\d{8}$/.test(shipping.phone.trim()))
+      errs.phone = t("errors.phoneInvalid");
+    if (!shipping.street.trim()) errs.street = t("errors.streetRequired");
+    if (!shipping.province.trim()) errs.province = t("errors.provinceRequired");
+    if (!shipping.ward.trim()) errs.ward = t("errors.wardRequired");
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
   if (!cart || (cart as any)?.items?.length === 0) {
     return (
       <div className="max-w-lg mx-auto px-4 py-20 text-center">
-        <h1 className="font-heading text-2xl text-warm-900 mb-4">{t("title")}</h1>
+        <h1 className="font-heading text-2xl text-warm-900 mb-4">
+          {t("title")}
+        </h1>
         <p className="text-warm-800/60 mb-6">Giỏ hàng trống</p>
-        <Link href="/products" className="text-sage-600 hover:underline font-medium">
+        <Link
+          href="/products"
+          className="text-sage-600 hover:underline font-medium"
+        >
           Tiếp tục mua sắm
         </Link>
       </div>
@@ -90,7 +111,9 @@ export default function CheckoutPage() {
             >
               {step > s ? <Check className="w-4 h-4" /> : i + 1}
             </div>
-            <span className={`text-sm ${step === s ? "font-medium text-warm-900" : "text-warm-800/50"}`}>
+            <span
+              className={`text-sm ${step === s ? "font-medium text-warm-900" : "text-warm-800/50"}`}
+            >
               {t(s)}
             </span>
             {i < 2 && <div className="w-8 h-px bg-cream-200" />}
@@ -103,28 +126,113 @@ export default function CheckoutPage() {
         <div className="space-y-4">
           <div>
             <Label htmlFor="name">{t("name")}</Label>
-            <Input id="name" value={shipping.name} onChange={(e) => setShipping({ ...shipping, name: e.target.value })} />
+            <Input
+              id="name"
+              value={shipping.name}
+              onChange={e => {
+                setShipping({ ...shipping, name: e.target.value });
+                setErrors(prev => {
+                  const { name: _, ...rest } = prev;
+                  return rest;
+                });
+              }}
+              className={errors.name ? "border-red-400" : ""}
+            />
+            {errors.name && (
+              <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="phone">{t("phone")}</Label>
-            <Input id="phone" value={shipping.phone} onChange={(e) => setShipping({ ...shipping, phone: e.target.value })} inputMode="numeric" />
+            <Input
+              id="phone"
+              value={shipping.phone}
+              onChange={e => {
+                setShipping({ ...shipping, phone: e.target.value });
+                setErrors(prev => {
+                  const { phone: _, ...rest } = prev;
+                  return rest;
+                });
+              }}
+              inputMode="numeric"
+              className={errors.phone ? "border-red-400" : ""}
+            />
+            {errors.phone && (
+              <p className="text-xs text-red-500 mt-1">{errors.phone}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="street">{t("street")}</Label>
-            <Input id="street" value={shipping.street} onChange={(e) => setShipping({ ...shipping, street: e.target.value })} />
+            <Input
+              id="street"
+              value={shipping.street}
+              onChange={e => {
+                setShipping({ ...shipping, street: e.target.value });
+                setErrors(prev => {
+                  const { street: _, ...rest } = prev;
+                  return rest;
+                });
+              }}
+              className={errors.street ? "border-red-400" : ""}
+            />
+            {errors.street && (
+              <p className="text-xs text-red-500 mt-1">{errors.street}</p>
+            )}
           </div>
           <div className="grid grid-cols-3 gap-3">
             <div>
               <Label htmlFor="province">{t("province")}</Label>
-              <Input id="province" value={shipping.province} onChange={(e) => setShipping({ ...shipping, province: e.target.value })} />
-            </div>
-            <div>
-              <Label htmlFor="district">{t("district")}</Label>
-              <Input id="district" value={shipping.district} onChange={(e) => setShipping({ ...shipping, district: e.target.value })} />
+              <Input
+                id="province"
+                value={shipping.province}
+                onChange={e => {
+                  setShipping({ ...shipping, province: e.target.value });
+                  setErrors(prev => {
+                    const { province: _, ...rest } = prev;
+                    return rest;
+                  });
+                }}
+                className={errors.province ? "border-red-400" : ""}
+              />
+              {errors.province && (
+                <p className="text-xs text-red-500 mt-1">{errors.province}</p>
+              )}
             </div>
             <div>
               <Label htmlFor="ward">{t("ward")}</Label>
-              <Input id="ward" value={shipping.ward} onChange={(e) => setShipping({ ...shipping, ward: e.target.value })} />
+              <Input
+                id="ward"
+                value={shipping.ward}
+                onChange={e => {
+                  setShipping({ ...shipping, ward: e.target.value });
+                  setErrors(prev => {
+                    const { ward: _, ...rest } = prev;
+                    return rest;
+                  });
+                }}
+                className={errors.ward ? "border-red-400" : ""}
+              />
+              {errors.ward && (
+                <p className="text-xs text-red-500 mt-1">{errors.ward}</p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="district">{t("district")}</Label>
+              <Input
+                id="district"
+                value={shipping.district}
+                onChange={e => {
+                  setShipping({ ...shipping, district: e.target.value });
+                  setErrors(prev => {
+                    const { district: _, ...rest } = prev;
+                    return rest;
+                  });
+                }}
+                className={errors.district ? "border-red-400" : ""}
+              />
+              {errors.district && (
+                <p className="text-xs text-red-500 mt-1">{errors.district}</p>
+              )}
             </div>
           </div>
           <div>
@@ -132,13 +240,20 @@ export default function CheckoutPage() {
             <Input
               id="message"
               value={cardMessage}
-              onChange={(e) => setCardMessage(e.target.value.slice(0, 100))}
+              onChange={e => setCardMessage(e.target.value.slice(0, 100))}
               placeholder={t("cardMessageHint")}
               maxLength={100}
             />
-            <p className="text-xs text-warm-800/40 mt-1">{cardMessage.length}/100</p>
+            <p className="text-xs text-warm-800/40 mt-1">
+              {cardMessage.length}/100
+            </p>
           </div>
-          <Button onClick={() => setStep("payment")} className="w-full bg-sage-500 hover:bg-sage-600 text-cream-100">
+          <Button
+            onClick={() => {
+              if (validateShipping()) setStep("payment");
+            }}
+            className="w-full bg-sage-500 hover:bg-sage-600 text-cream-100"
+          >
             {t("continue")}
           </Button>
         </div>
@@ -150,7 +265,7 @@ export default function CheckoutPage() {
           <div className="space-y-2">
             <Label>{t("deliveryTime")}</Label>
             <div className="grid grid-cols-4 gap-2">
-              {(["asap", "today", "tomorrow", "date"] as const).map((opt) => (
+              {(["asap", "today", "tomorrow", "date"] as const).map(opt => (
                 <button
                   key={opt}
                   onClick={() => setDeliveryTime(opt)}
@@ -169,7 +284,7 @@ export default function CheckoutPage() {
           {/* Payment method */}
           <div className="space-y-2">
             <Label>{t("paymentMethod")}</Label>
-            {(["cod", "vnpay", "momo"] as const).map((m) => (
+            {(["cod", "vnpay", "momo"] as const).map(m => (
               <button
                 key={m}
                 onClick={() => setPaymentMethod(m)}
@@ -189,17 +304,26 @@ export default function CheckoutPage() {
             <input
               type="checkbox"
               checked={photoConfirm}
-              onChange={(e) => setPhotoConfirm(e.target.checked)}
+              onChange={e => setPhotoConfirm(e.target.checked)}
               className="w-4 h-4 rounded border-cream-300 text-sage-500 focus:ring-sage-500"
             />
-            <span className="text-sm text-warm-800">{t("photoBeforeSend")}</span>
+            <span className="text-sm text-warm-800">
+              {t("photoBeforeSend")}
+            </span>
           </label>
 
           <div className="flex gap-3">
-            <Button variant="outline" onClick={() => setStep("shipping")} className="flex-1 border-cream-200">
+            <Button
+              variant="outline"
+              onClick={() => setStep("shipping")}
+              className="flex-1 border-cream-200"
+            >
               {t("back")}
             </Button>
-            <Button onClick={() => setStep("review")} className="flex-1 bg-sage-500 hover:bg-sage-600 text-cream-100">
+            <Button
+              onClick={() => setStep("review")}
+              className="flex-1 bg-sage-500 hover:bg-sage-600 text-cream-100"
+            >
               {t("continue")}
             </Button>
           </div>
@@ -215,7 +339,9 @@ export default function CheckoutPage() {
                 <span className="text-warm-800">
                   {item.title} × {item.quantity}
                 </span>
-                <span className="font-medium">{formatVND(item.unit_price * item.quantity)}</span>
+                <span className="font-medium">
+                  {formatVND(item.unit_price * item.quantity)}
+                </span>
               </div>
             ))}
             <div className="border-t border-cream-200 pt-2 flex justify-between font-medium">
@@ -225,16 +351,35 @@ export default function CheckoutPage() {
           </div>
 
           <div className="text-sm text-warm-800 space-y-1">
-            <p><strong>{t("name")}:</strong> {shipping.name}</p>
-            <p><strong>{t("phone")}:</strong> {shipping.phone}</p>
-            <p><strong>{t("address")}:</strong> {shipping.street}, {shipping.ward}, {shipping.district}, {shipping.province}</p>
-            <p><strong>{t("deliveryTime")}:</strong> {t(deliveryTime as any)}</p>
-            <p><strong>{t("paymentMethod")}:</strong> {t(paymentMethod as any)}</p>
-            {cardMessage && <p><strong>{t("cardMessage")}:</strong> {cardMessage}</p>}
+            <p>
+              <strong>{t("name")}:</strong> {shipping.name}
+            </p>
+            <p>
+              <strong>{t("phone")}:</strong> {shipping.phone}
+            </p>
+            <p>
+              <strong>{t("address")}:</strong> {shipping.street},{" "}
+              {shipping.ward}, {shipping.district}, {shipping.province}
+            </p>
+            <p>
+              <strong>{t("deliveryTime")}:</strong> {t(deliveryTime as any)}
+            </p>
+            <p>
+              <strong>{t("paymentMethod")}:</strong> {t(paymentMethod as any)}
+            </p>
+            {cardMessage && (
+              <p>
+                <strong>{t("cardMessage")}:</strong> {cardMessage}
+              </p>
+            )}
           </div>
 
           <div className="flex gap-3">
-            <Button variant="outline" onClick={() => setStep("payment")} className="flex-1 border-cream-200">
+            <Button
+              variant="outline"
+              onClick={() => setStep("payment")}
+              className="flex-1 border-cream-200"
+            >
               {t("back")}
             </Button>
             <Button

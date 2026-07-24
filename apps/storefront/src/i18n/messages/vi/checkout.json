@@ -36,5 +36,14 @@
   "continue": "Tiếp tục",
   "back": "Quay lại",
   "error": "Có lỗi xảy ra, vui lòng thử lại",
-  "addressIncomplete": "Vui lòng nhập đầy đủ địa chỉ"
+  "addressIncomplete": "Vui lòng nhập đầy đủ địa chỉ",
+  "errors": {
+    "nameRequired": "Vui lòng nhập họ tên người nhận",
+    "phoneRequired": "Vui lòng nhập số điện thoại",
+    "phoneInvalid": "Số điện thoại không hợp lệ (VD: 0909123456)",
+    "streetRequired": "Vui lòng nhập số nhà, tên đường",
+    "provinceRequired": "Vui lòng nhập tỉnh/thành phố",
+    "districtRequired": "Vui lòng nhập quận/huyện",
+    "wardRequired": "Vui lòng nhập phường/xã"
+  }
 }

@@ -36,5 +36,14 @@
   "continue": "Continue",
   "back": "Back",
   "error": "Something went wrong, please try again",
-  "addressIncomplete": "Please complete your shipping address"
+  "addressIncomplete": "Please complete your shipping address",
+  "errors": {
+    "nameRequired": "Please enter recipient name",
+    "phoneRequired": "Please enter phone number",
+    "phoneInvalid": "Invalid phone number (e.g., 0909123456)",
+    "streetRequired": "Please enter street address",
+    "provinceRequired": "Please enter province/city",
+    "districtRequired": "Please enter district",
+    "wardRequired": "Please enter ward"
+  }
 }

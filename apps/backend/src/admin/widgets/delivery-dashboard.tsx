@@ -1,6 +1,6 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
 import { Container, Heading, Text, StatusBadge } from "@medusajs/ui";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
 // ponytail: GHN delivery status dashboard. Shows fulfillment status counts
 // for today's orders. Add GHN API polling when webhooks are configured.
@@ -118,4 +118,13 @@ export const config = defineWidgetConfig({
   id: "bloom:delivery-dashboard-widget",
 });
 
-export default DeliveryDashboardWidget;
+function DeliveryDashboardWidgetWithProvider() {
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <DeliveryDashboardWidget />
+    </QueryClientProvider>
+  );
+}
+
+export default DeliveryDashboardWidgetWithProvider;

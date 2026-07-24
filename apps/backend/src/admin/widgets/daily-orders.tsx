@@ -1,6 +1,6 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
 import { Container, Heading, Text, StatusBadge } from "@medusajs/ui";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 
 // ponytail: admin SDK has no useAdminCustomQuery. Use tanstack-query + fetch directly.
 // __BACKEND_URL__ is injected by Vite at build time from admin bundler.
@@ -136,4 +136,14 @@ export const config = defineWidgetConfig({
   id: "bloom:daily-orders-widget",
 });
 
-export default DailyOrdersWidget;
+const queryClient = new QueryClient();
+
+function DailyOrdersWidgetWithProvider() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <DailyOrdersWidget />
+    </QueryClientProvider>
+  );
+}
+
+export default DailyOrdersWidgetWithProvider;

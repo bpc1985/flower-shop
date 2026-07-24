@@ -49,24 +49,24 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
           <Label htmlFor="reg-first">{t("firstName")}</Label>
-          <Input id="reg-first" {...registerField("first_name")} />
-          {errors.first_name && <p className="text-destructive text-sm">{errors.first_name.message}</p>}
+          <Input id="reg-first" className={errors.first_name ? "border-red-400" : ""} {...registerField("first_name")} />
+          {errors.first_name && <p className="text-xs text-red-500 mt-1">{errors.first_name.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="reg-last">{t("lastName")}</Label>
-          <Input id="reg-last" {...registerField("last_name")} />
-          {errors.last_name && <p className="text-destructive text-sm">{errors.last_name.message}</p>}
+          <Input id="reg-last" className={errors.last_name ? "border-red-400" : ""} {...registerField("last_name")} />
+          {errors.last_name && <p className="text-xs text-red-500 mt-1">{errors.last_name.message}</p>}
         </div>
       </div>
       <div className="space-y-2">
         <Label htmlFor="reg-email">{t("email")}</Label>
-        <Input id="reg-email" type="email" {...registerField("email")} />
-        {errors.email && <p className="text-destructive text-sm">{errors.email.message}</p>}
+        <Input id="reg-email" type="email" className={errors.email ? "border-red-400" : ""} {...registerField("email")} />
+        {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="reg-password">{t("password")}</Label>
-        <Input id="reg-password" type="password" {...registerField("password")} />
-        {errors.password && <p className="text-destructive text-sm">{errors.password.message}</p>}
+        <Input id="reg-password" type="password" className={errors.password ? "border-red-400" : ""} {...registerField("password")} />
+        {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>}
       </div>
       <Button
         type="submit"

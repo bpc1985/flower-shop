@@ -64,9 +64,10 @@ export function PhoneOTPForm({ onSuccess }: PhoneOTPFormProps) {
               placeholder={t("phone")}
               maxLength={12}
               inputMode="numeric"
+              className={error ? "border-red-400" : ""}
             />
           </div>
-          {error && <p className="text-destructive text-sm">{error}</p>}
+          {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
           <Button
             onClick={handleSendOTP}
             disabled={isRequesting}
@@ -81,7 +82,7 @@ export function PhoneOTPForm({ onSuccess }: PhoneOTPFormProps) {
             {t("enterOTP", { phone })}
           </p>
           <OTPInput onComplete={handleVerifyOTP} disabled={isVerifying} />
-          {error && <p className="text-destructive text-sm text-center">{error}</p>}
+          {error && <p className="text-xs text-red-500 mt-1 text-center">{error}</p>}
           <Button
             variant="link"
             onClick={handleSendOTP}

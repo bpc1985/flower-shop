@@ -1,6 +1,6 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
 import { Container, Heading, Text, Switch, Badge } from "@medusajs/ui";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // ponytail: toggle seasonal product promotions (e.g. Tet, Valentine, 8/3).
 // Stores state in Medusa app_metadata. Add proper settings module later.
@@ -107,4 +107,13 @@ export const config = defineWidgetConfig({
   id: "bloom:seasonal-promo-widget",
 });
 
-export default SeasonalPromoWidget;
+function SeasonalPromoWidgetWithProvider() {
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SeasonalPromoWidget />
+    </QueryClientProvider>
+  );
+}
+
+export default SeasonalPromoWidgetWithProvider;
