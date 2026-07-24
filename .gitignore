@@ -11,3 +11,4 @@ coverage
 .turbo
 *.log
 .DS_Store
+apps/backend/.medusa/types
