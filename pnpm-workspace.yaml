@@ -1,6 +1,9 @@
 packages:
   - "apps/*"
   - "packages/*"
+overrides:
+  lodash: ^4.17.24
+
 allowBuilds:
   '@medusajs/telemetry': true
   '@parcel/watcher': true

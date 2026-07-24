@@ -5,11 +5,21 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const config: NextConfig = {
   images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [375, 640, 768, 1024, 1280, 1536],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       { protocol: "https", hostname: "**.medusajs.com" },
       { protocol: "https", hostname: "**.unsplash.com" },
       { protocol: "https", hostname: "**.placehold.co" },
       { protocol: "http", hostname: "localhost" },
+    ],
+  },
+  experimental: {
+    optimizePackageImports: [
+      "@medusajs/js-sdk",
+      "lucide-react",
+      "@tanstack/react-query",
     ],
   },
   async headers() {

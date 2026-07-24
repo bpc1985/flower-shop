@@ -1,20 +1,47 @@
 import { notFound } from "next/navigation";
-import { FilterSidebar } from "@/components/category/filter-sidebar";
+import { FilterSidebarSuspense } from "@/components/category/filter-sidebar-suspense";
 import { ProductGrid } from "@/components/product/product-grid";
+import type { ProductGridFilters } from "@/components/product/product-grid";
 import { CategoryBreadcrumb } from "@/components/category/category-breadcrumb";
 import { OCCASIONS } from "@/lib/occasion-calendar";
 import { getTranslations } from "next-intl/server";
 
 interface OccasionPageProps {
   params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export default async function OccasionPage({ params }: OccasionPageProps) {
+function parseFilters(sp: Record<string, string | string[] | undefined>): ProductGridFilters {
+  const occasions = (() => {
+    const v = sp["occasion"];
+    if (!v) return undefined;
+    return Array.isArray(v) ? v : [v];
+  })();
+  const minPrice = (() => {
+    const v = sp["min_price"];
+    if (typeof v !== "string") return undefined;
+    const n = Number(v);
+    return isNaN(n) ? undefined : n;
+  })();
+  const maxPrice = (() => {
+    const v = sp["max_price"];
+    if (typeof v !== "string") return undefined;
+    const n = Number(v);
+    return isNaN(n) ? undefined : n;
+  })();
+
+  return { occasions, minPrice, maxPrice };
+}
+
+export default async function OccasionPage({ params, searchParams }: OccasionPageProps) {
   const { locale, slug } = await params;
+  const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "category" });
 
   const occasion = OCCASIONS.find((o) => o.slug === slug);
   if (!occasion) notFound();
+
+  const filters = parseFilters(sp);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -28,10 +55,10 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
 
       <div className="flex gap-8">
         <aside className="hidden lg:block w-64 shrink-0">
-          <FilterSidebar />
+          <FilterSidebarSuspense />
         </aside>
         <main className="flex-1">
-          <ProductGrid occasionSlug={slug} />
+          <ProductGrid filters={filters} />
         </main>
       </div>
     </div>

@@ -5,5 +5,11 @@
   "priceHigh": "Price high → low",
   "newest": "Newest",
   "deliveryAvailable": "Fast delivery",
-  "clearAll": "Clear all"
+  "clearAll": "Clear all",
+  "occasions": "Occasions",
+  "price": "Price",
+  "minPrice": "From",
+  "maxPrice": "To",
+  "apply": "Apply",
+  "activeFilters": "Active Filters"
 }

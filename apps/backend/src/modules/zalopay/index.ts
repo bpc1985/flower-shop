@@ -43,8 +43,9 @@ class ZaloPayClient {
   }
 
   verifyMAC(data: Record<string, string>): boolean {
-    const mac = this.sign(data);
-    return mac === (data.mac || "");
+    const { mac: _mac, ...params } = data;
+    const computed = this.sign(params);
+    return computed === (data.mac || "");
   }
 
   async createOrder(params: { amount: number; orderId: string; description?: string }): Promise<string> {

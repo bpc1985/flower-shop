@@ -12,5 +12,11 @@
     "account": "Account",
     "login": "Login",
     "logout": "Logout"
+  },
+  "search": {
+    "placeholder": "Search products...",
+    "noResults": "No products found",
+    "searching": "Searching...",
+    "error": "An error occurred"
   }
 }

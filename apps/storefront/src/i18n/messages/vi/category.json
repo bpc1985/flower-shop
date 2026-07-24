@@ -5,5 +5,11 @@
   "priceHigh": "Giá cao → thấp",
   "newest": "Mới nhất",
   "deliveryAvailable": "Có giao nhanh",
-  "clearAll": "Xoá bộ lọc"
+  "clearAll": "Xoá bộ lọc",
+  "occasions": "Dịp",
+  "price": "Giá",
+  "minPrice": "Từ",
+  "maxPrice": "Đến",
+  "apply": "Áp dụng",
+  "activeFilters": "Bộ lọc đang dùng"
 }

@@ -12,5 +12,11 @@
     "account": "Tài khoản",
     "login": "Đăng nhập",
     "logout": "Đăng xuất"
+  },
+  "search": {
+    "placeholder": "Tìm kiếm sản phẩm...",
+    "noResults": "Không tìm thấy sản phẩm",
+    "searching": "Đang tìm...",
+    "error": "Có lỗi xảy ra"
   }
 }

@@ -6,9 +6,11 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
+    "test": "turbo test",
     "clean": "turbo clean"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "turbo": "^2.0.0",
     "typescript": "^5.5.0"
   },

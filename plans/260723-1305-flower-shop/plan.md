@@ -47,7 +47,7 @@ monorepo (pnpm + Turborepo)
 | 7 | Storefront Full | 3,4,5,6 | High | Cart, checkout (guest + auth), all UX patterns |
 | 8 | Admin Widgets | 7 | Medium | Admin customizations with real order data |
 | 9 | Extended Payments & Shipping | 5,6,7 | Medium-High | ZaloPay + GHTK + carrier comparison |
-| 10 | Testing, SEO, Deploy | All | Medium | Test suite, perf audit, deployment |
+| 10 | Testing, SEO, Deploy | All | Medium | Test suite, perf audit, deployment | Complete |
 
 ## Dependency Graph (Fixed)
 
