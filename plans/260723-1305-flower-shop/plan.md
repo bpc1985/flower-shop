@@ -2,7 +2,7 @@
 
 **Status:** Planning
 **Created:** 2026-07-23 | **Revised:** 2026-07-23 (red team review)
-**Stack:** MedusaJS 2.x + NextJS 15, TypeScript, TailwindCSS, Shadcn UI, Tanstack Query
+**Stack:** MedusaJS 2.x + Next.js 16, TypeScript, TailwindCSS, Shadcn UI, Tanstack Query
 
 ## Architecture
 
@@ -22,7 +22,7 @@ monorepo (pnpm + Turborepo)
 │   │   │   ├── admin-widgets/   # Phase 8
 │   │   │   └── jobs/            # Scheduled jobs (address codes, payment cleanup)
 │   │   └── medusa-config.ts
-│   └── storefront/       # Next.js 15 App Router
+│   └── storefront/       # Next.js 16 App Router
 │       ├── src/
 │       │   ├── app/[locale]/  # i18n from Phase 1
 │       │   ├── components/

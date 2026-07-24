@@ -241,7 +241,7 @@ export const logger = winston.createLogger({
 });
 ```
 
-## 1.4 Storefront (Next.js 15)
+## 1.4 Storefront (Next.js 16)
 
 ### apps/storefront/package.json
 ```json

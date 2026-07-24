@@ -5,7 +5,7 @@ Premium floral e-commerce platform for Vietnam market. Built with MedusaJS headl
 ## Stack
 
 - **Backend:** MedusaJS 2.x (headless commerce), PostgreSQL, Redis, MinIO
-- **Storefront:** Next.js 15 (App Router), TypeScript, TailwindCSS, Shadcn UI, Tanstack Query
+- **Storefront:** Next.js 16 (App Router), TypeScript, TailwindCSS, Shadcn UI, Tanstack Query
 - **Payments:** VNPay, Momo, ZaloPay (custom Medusa providers) — Phase 5/9
 - **Shipping:** GHN, GHTK (custom Medusa fulfillment providers) — Phase 6/9
 - **Auth:** Email/Password + Google OAuth + Phone OTP (ESMS/SpeedSMS, dev-mode console log)
@@ -62,7 +62,7 @@ All auth env vars are optional. Without them:
 │   │       ├── modules/  phone-otp/ (custom auth provider)
 │   │       ├── lib/      env.ts, logger.ts
 │   │       └── scripts/  seed suites
-│   └── storefront/       Next.js 15 App Router — [locale] routing (vi/en, default vi)
+│   └── storefront/       Next.js 16 App Router — [locale] routing (vi/en, default vi)
 │       └── src/
 │           ├── components/  auth/ layout/ home/ product/ category/ cart/ checkout/
 │           ├── hooks/       Tanstack Query wrappers

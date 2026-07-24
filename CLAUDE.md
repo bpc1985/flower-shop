@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Bloom Wedding -- premium floral e-commerce for Vietnam. MedusaJS 2.x backend + Next.js 15 storefront. Occasion-first navigation, speed-based delivery, bilingual VN/EN.
+Bloom Wedding -- premium floral e-commerce for Vietnam. MedusaJS 2.x backend + Next.js 16 storefront. Occasion-first navigation, speed-based delivery, bilingual VN/EN.
 
 ## Commands
 
@@ -39,7 +39,7 @@ pnpm monorepo (Turborepo)
 │       ├── modules/       Custom providers -- phone-otp/ vnpay/ momo/ ghn/
 │       ├── scripts/       Seed scripts
 │       └── admin-widgets/ Phase 8
-├── apps/storefront/       Next.js 15 App Router
+├── apps/storefront/       Next.js 16 App Router
 │   └── src/
 │       ├── app/[locale]/  i18n routes (vi/en, default vi) -- / /products /occasions /checkout /account
 │       ├── components/    auth/ layout/ home/ product/ category/ cart/ checkout/

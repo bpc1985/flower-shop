@@ -204,7 +204,7 @@ When payment completes (Phase 5/7), the cart should be cleared. When auth state 
 
 ### M2. No SSR/SSG strategy for product pages
 
-Phase 3 builds product listing and detail pages with client-side Tanstack Query fetching. Product pages are highly SEO-sensitive (flower shop relies on organic search). Client-side rendering means search engines see empty shells. Next.js 15 App Router supports Server Components — product pages should pre-render server-side with ISR (revalidate every 30 min). The plan never mentions RSC, `generateStaticParams`, or ISR.
+Phase 3 builds product listing and detail pages with client-side Tanstack Query fetching. Product pages are highly SEO-sensitive (flower shop relies on organic search). Client-side rendering means search engines see empty shells. Next.js 16 App Router supports Server Components — product pages should pre-render server-side with ISR (revalidate every 30 min). The plan never mentions RSC, `generateStaticParams`, or ISR.
 
 ### M3. No error boundary between payment redirect and return
 
