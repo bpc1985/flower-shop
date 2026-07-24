@@ -58,25 +58,29 @@ export function ProductGrid({ filters }: ProductGridProps) {
   });
   const t = useTranslations("product");
 
+  const occasions = filters?.occasions;
+  const minPrice = filters?.minPrice;
+  const maxPrice = filters?.maxPrice;
+
   const filteredProducts = useMemo(() => {
     if (!products) return [];
     let result = products;
 
-    if (filters?.occasions && filters.occasions.length > 0) {
-      result = result.filter((p) => matchesOccasionKeywords(p, filters.occasions!));
+    if (occasions && occasions.length > 0) {
+      result = result.filter((p) => matchesOccasionKeywords(p, occasions));
     }
 
-    if (filters?.minPrice != null || filters?.maxPrice != null) {
+    if (minPrice != null || maxPrice != null) {
       result = result.filter((p) => {
         const min = getMinVariantPrice(p);
-        if (filters.minPrice != null && min < filters.minPrice) return false;
-        if (filters.maxPrice != null && min > filters.maxPrice) return false;
+        if (minPrice != null && min < minPrice) return false;
+        if (maxPrice != null && min > maxPrice) return false;
         return true;
       });
     }
 
     return result;
-  }, [products, filters?.occasions, filters?.minPrice, filters?.maxPrice]);
+  }, [products, occasions, minPrice, maxPrice]);
 
   if (isLoading) {
     return (

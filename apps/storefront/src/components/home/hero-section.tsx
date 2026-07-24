@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 
@@ -26,10 +27,12 @@ export function HeroSection() {
           </div>
 
           <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=800&q=80"
               alt=""
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>

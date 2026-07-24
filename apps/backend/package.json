@@ -9,8 +9,8 @@
     "seed": "medusa exec ./src/scripts/seed.ts",
     "migration:generate": "medusa db:generate",
     "migration:run": "medusa db:migrate",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "VITE_CJS_IGNORE_WARNING=1 vitest run",
+    "test:watch": "VITE_CJS_IGNORE_WARNING=1 vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@types/pg": "^8.11.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.0",
     "vitest": "^3.2.7"

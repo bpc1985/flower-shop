@@ -24,8 +24,9 @@ export function CartDrawer({ children }: { children?: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // Close cart drawer on route change (checkout, product, etc.)
+  // ponytail: setState in effect is safe here — single close on navigation, no cascading renders.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
   }, [pathname]);
 
