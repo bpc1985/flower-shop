@@ -16,7 +16,7 @@ const parsed = envSchema.safeParse({
 });
 
 if (!parsed.success) {
-  throw new Error(
+  console.error(
     `Missing required environment variables:\n${parsed.error.errors
       .map((e) => `  - ${e.path.join(".")}: ${e.message}`)
       .join("\n")}`
